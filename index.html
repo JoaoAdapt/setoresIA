@@ -946,6 +946,133 @@
       font-weight: 800;
     }
 
+
+    /* =========================================================
+      11. CADASTRO E RANKING
+    ========================================================== */
+
+    .register-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field-label {
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .game-input {
+      width: 100%;
+      min-height: 52px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      transition:
+        border-color var(--transition),
+        box-shadow var(--transition),
+        background var(--transition);
+    }
+
+    .game-input::placeholder {
+      color: rgba(244, 244, 245, 0.42);
+    }
+
+    .game-input:focus {
+      outline: none;
+      border-color: rgba(57, 255, 20, 0.58);
+      box-shadow: 0 0 0 4px rgba(57, 255, 20, 0.12);
+      background: rgba(255, 255, 255, 0.085);
+    }
+
+    .game-input.is-invalid {
+      border-color: rgba(251, 113, 133, 0.72);
+      box-shadow: 0 0 0 4px rgba(251, 113, 133, 0.12);
+    }
+
+    .field-error {
+      min-height: 18px;
+      color: var(--danger);
+      font-size: 0.8rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .ranking-button {
+      margin-top: 0;
+      margin-bottom: 20px;
+      border-color: rgba(57, 255, 20, 0.28);
+      background: rgba(57, 255, 20, 0.08);
+      color: var(--text);
+    }
+
+    .ranking-state {
+      margin: 18px 0;
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .ranking-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .ranking-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--text);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .ranking-item.is-current {
+      border-color: rgba(57, 255, 20, 0.38);
+      background: rgba(57, 255, 20, 0.1);
+      box-shadow: 0 0 24px rgba(57, 255, 20, 0.1);
+    }
+
+    .ranking-position {
+      min-width: 42px;
+      font-weight: 900;
+      color: var(--neon);
+    }
+
+    .ranking-name {
+      overflow: hidden;
+      color: var(--text);
+      font-weight: 800;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .ranking-score {
+      color: var(--neon);
+      font-size: 0.9rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
     /* =========================================================
       10. ESTADOS AUXILIARES E RESPONSIVIDADE
     ========================================================== */
@@ -1108,6 +1235,82 @@
       </section>
 
       <!-- =========================================================
+        TELA DE CADASTRO
+      ========================================================== -->
+
+      <section
+        id="screen-register"
+        class="screen"
+        aria-labelledby="registerTitle"
+      >
+        <div class="screen-card">
+          <div class="screen-content">
+            <div class="section-header">
+              <div class="eyebrow">
+                <span aria-hidden="true">📝</span>
+                Antes de começar
+              </div>
+
+              <h2 id="registerTitle">Quem é você?</h2>
+
+              <p class="subtitle">
+                Seu resultado vai pro ranking geral. Sem cadastro, sem pontos.
+              </p>
+            </div>
+
+            <form id="registerForm" class="register-form" novalidate>
+              <div class="field-group">
+                <label class="field-label" for="playerNameInput">Nome completo</label>
+                <input
+                  id="playerNameInput"
+                  class="game-input"
+                  type="text"
+                  placeholder="Seu nome"
+                  autocomplete="name"
+                />
+                <span id="playerNameError" class="field-error" aria-live="polite"></span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="playerAgeInput">Idade</label>
+                <input
+                  id="playerAgeInput"
+                  class="game-input"
+                  type="number"
+                  min="10"
+                  max="99"
+                  placeholder="Sua idade"
+                  inputmode="numeric"
+                />
+                <span id="playerAgeError" class="field-error" aria-live="polite"></span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="playerEmailInput">E-mail</label>
+                <input
+                  id="playerEmailInput"
+                  class="game-input"
+                  type="email"
+                  placeholder="Seu melhor e-mail"
+                  autocomplete="email"
+                />
+                <span id="playerEmailError" class="field-error" aria-live="polite"></span>
+              </div>
+
+              <button
+                id="registerSubmitButton"
+                class="primary-button"
+                type="submit"
+              >
+                <span>Entrar na Missão</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
         TELA 2 — SELEÇÃO DE SETOR
       ========================================================== -->
 
@@ -1240,7 +1443,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Abrir tudo manualmente e tentar entender sozinho
+                Fazer um resumo rápido de cabeça com base no que lembra das campanhas
               </button>
             </div>
           </div>
@@ -1304,9 +1507,8 @@
             </h2>
 
             <p class="result-text">
-              Dois dias depois, Thomas ainda estava no meio das planilhas. Sem conclusão clara,
-              sem energia. O cliente cobrou e a reunião virou crise. IA não substitui o raciocínio —
-              mas ignorá-la tem um custo alto.
+              Thomas confiou na memória e apresentou números errados. O cliente questionou cada dado,
+              a credibilidade da análise inteira foi por água abaixo e a reunião terminou sem conclusão.
             </p>
 
             <button
@@ -1365,7 +1567,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Responder de cabeça com o que lembra, sem análise
+                Pedir mais 24h pro cliente para fazer uma análise completa manual
               </button>
             </div>
           </div>
@@ -1428,9 +1630,9 @@
             </h2>
 
             <p class="result-text">
-              A resposta foi vaga. O cliente questionou tudo. Uma reunião que deveria durar
-              30 minutos virou 2 horas de crise. Improvisar sem dados em tráfego pago é um risco
-              que não vale a pena.
+              O cliente interpretou o pedido como despreparo. Começou a questionar se a agência
+              realmente acompanha a conta no dia a dia. A confiança foi abalada por uma decisão
+              que parecia responsável.
             </p>
 
             <button
@@ -1490,7 +1692,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Escrever cada descrição do zero, uma por uma
+                Copiar descrições de vagas similares de outras empresas e adaptar
               </button>
             </div>
           </div>
@@ -1554,9 +1756,8 @@
             </h2>
 
             <p class="result-text">
-              Larissa conseguiu terminar 2 vagas até o fim do dia. As outras 3 atrasaram o processo
-              seletivo inteiro. Tempo perdido em tarefas repetitivas é tempo roubado do que
-              realmente importa.
+              As vagas ficaram genéricas, sem refletir a cultura da empresa. Os candidatos que se
+              inscreveram eram perfis errados e o processo seletivo inteiro teve que ser refeito do zero.
             </p>
 
             <button
@@ -1615,7 +1816,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Ler os 80 currículos um por um
+                Pedir para o gestor de cada área fazer a triagem inicial sozinho
               </button>
             </div>
           </div>
@@ -1678,8 +1879,8 @@
             </h2>
 
             <p class="result-text">
-              Larissa passou o dia inteiro lendo currículo. No final da tarde, cansada, começou a
-              errar na avaliação. Quantidade sem critério gera ruído, não resultado.
+              Cada gestor usou critérios diferentes. Os candidatos ficaram sem resposta por dias.
+              Dois perfis excelentes desistiram enquanto esperavam e fecharam com outras empresas.
             </p>
 
             <button
@@ -1739,7 +1940,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Entrar na reunião confiando no improviso
+                Pesquisar rapidamente o site e Instagram do cliente antes da reunião
               </button>
             </div>
           </div>
@@ -1803,9 +2004,9 @@
             </h2>
 
             <p class="result-text">
-              Pedro não entendeu os termos do cliente, deu respostas genéricas e perdeu credibilidade
-              nos primeiros 10 minutos. A reunião não avançou. Improvisar sem contexto em vendas
-              tem um custo alto.
+              Pedro entendeu o visual da empresa mas não entendeu o mercado. Usou termos errados,
+              propôs soluções que não faziam sentido pro segmento e perdeu credibilidade logo
+              nos primeiros minutos.
             </p>
 
             <button
@@ -1865,7 +2066,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Usar o modelo genérico de 2022 com pequenas adaptações
+                Montar a proposta rápido com base só no que o cliente falou na reunião
               </button>
             </div>
           </div>
@@ -1928,8 +2129,8 @@
             </h2>
 
             <p class="result-text">
-              O cliente percebeu que a proposta era genérica. Sentiu que não foi ouvido e escolheu
-              outra agência. Template desatualizado não vende — contexto e personalização vendem.
+              A proposta estava tecnicamente correta mas não conectou com as dores reais do cliente.
+              Pareceu feita pra qualquer empresa, não pra ele. O lead foi embora sem fechar.
             </p>
 
             <button
@@ -1989,7 +2190,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Ligar para todos na ordem da lista, sem critério
+                Focar nos leads que responderam o e-mail de prospecção e ignorar o resto por hoje
               </button>
             </div>
           </div>
@@ -2053,9 +2254,9 @@
             </h2>
 
             <p class="result-text">
-              Ana passou o dia em ligações improdutivas. No fim da tarde, quando chegou nos leads
-              quentes, eles já tinham sido abordados pela concorrência. Esforço sem estratégia
-              não gera resultado.
+              Os leads que responderam o e-mail eram curiosos, não qualificados. Os leads quentes
+              que não responderam estavam esperando uma ligação — e foram abordados pela concorrência
+              enquanto Ana perdia tempo.
             </p>
 
             <button
@@ -2115,7 +2316,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Encaminhar o e-mail para o time técnico sem contexto e esperar
+                Responder que vai verificar com o time técnico e retornar em breve, sem prazo definido
               </button>
             </div>
           </div>
@@ -2178,8 +2379,8 @@
             </h2>
 
             <p class="result-text">
-              O lead ficou 2 dias sem resposta clara. Perdeu o interesse e fechou com outra empresa.
-              Tempo de resposta e qualidade do atendimento são diferenciais que a IA ajuda a manter.
+              O lead ficou 2 dias sem resposta concreta. Interpretou o silêncio como desorganização
+              e fechou com outra agência que respondeu na mesma hora.
             </p>
 
             <button
@@ -2238,7 +2439,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Responder na hora com o que está sentindo
+                Esperar o cliente se acalmar e responder só amanhã para não piorar a situação
               </button>
             </div>
           </div>
@@ -2302,8 +2503,9 @@
             </h2>
 
             <p class="result-text">
-              A resposta de Bruno acirrou o conflito. O cliente ficou ainda mais irritado e pediu
-              cancelamento. Responder no impulso em CS é quase sempre um erro que custa caro.
+              O silêncio foi interpretado como descaso. O cliente postou uma reclamação pública
+              ainda naquela noite e escalou para o diretor. Uma resposta cuidadosa na hora teria
+              evitado tudo isso.
             </p>
 
             <button
@@ -2362,7 +2564,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Fazer cada relatório do zero, um por um
+                Usar o relatório do mês passado trocando só as datas e os principais números
               </button>
             </div>
           </div>
@@ -2425,9 +2627,8 @@
             </h2>
 
             <p class="result-text">
-              Bruno entregou na sexta às 23h, com erros de digitação e dois clientes reclamaram do
-              padrão. Trabalho repetitivo feito manualmente cansa e gera erro. IA resolve exatamente
-              isso.
+              Dois clientes perceberam que o texto de análise estava idêntico ao mês anterior.
+              Sentiram que não eram acompanhados de verdade e abriram conversa sobre cancelamento.
             </p>
 
             <button
@@ -2486,7 +2687,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Tentar criar as 10 variações do zero, na cabeça
+                Criar 3 variações bem elaboradas em vez de entregar 10 mediocres
               </button>
             </div>
           </div>
@@ -2550,9 +2751,8 @@
             </h2>
 
             <p class="result-text">
-              Júlia entregou 6 variações cansadas e parecidas entre si. O cliente pediu refação.
-              Criatividade forçada sem processo gera retrabalho — e retrabalho custa tempo que
-              você não tem.
+              O cliente precisava de 10 variações para testar em campanha. Com apenas 3, o teste A/B
+              ficou inconclusivo e ele questionou o volume entregue, pedindo o restante com urgência.
             </p>
 
             <button
@@ -2611,7 +2811,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Tentar adivinhar o que o cliente quis dizer e já começar a escrever
+                Pedir uma reunião de alinhamento com o cliente antes de começar qualquer coisa
               </button>
             </div>
           </div>
@@ -2674,9 +2874,9 @@
             </h2>
 
             <p class="result-text">
-              Júlia entregou algo completamente diferente do que o cliente esperava. Retrabalho
-              total, cliente frustrado, prazo estourado. Adivinhar briefing é sempre aposta — e
-              aposta em copy quase sempre perde.
+              O cliente achou que a agência estava enrolando. Questionou por que precisava de reunião
+              para uma tarefa simples. A relação de confiança começou a rachar antes de uma linha
+              ser escrita.
             </p>
 
             <button
@@ -2736,7 +2936,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Mandar as anotações brutas para o designer e pedir para ele se virar
+                Fazer uma reunião rápida de 15 minutos com o designer para explicar verbalmente
               </button>
             </div>
           </div>
@@ -2800,9 +3000,8 @@
             </h2>
 
             <p class="result-text">
-              O designer interpretou errado, fez a peça toda no caminho oposto e o prazo estourou
-              com a refação. Anotação bagunçada não é briefing — e briefing ruim é o maior gerador
-              de retrabalho em design.
+              O designer entendeu na reunião mas esqueceu detalhes importantes na execução. Sem nada
+              documentado, Rafael não conseguiu provar o que foi combinado quando o cliente rejeitou a peça.
             </p>
 
             <button
@@ -2861,7 +3060,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Repassar para o designer só com 'moderno e jovem' e esperar o resultado
+                Mandar 3 prints de concorrentes como referência sem contexto adicional
               </button>
             </div>
           </div>
@@ -2924,9 +3123,8 @@
             </h2>
 
             <p class="result-text">
-              O designer entregou algo genérico. O cliente rejeitou, o processo recomeçou do zero
-              e a confiança no trabalho da agência caiu. Subjetivo sem tradução vira retrabalho
-              garantido.
+              O designer replicou o estilo dos concorrentes diretos. O cliente reconheceu a semelhança
+              imediatamente, ficou constrangido e pediu uma identidade que fosse realmente única.
             </p>
 
             <button
@@ -2985,7 +3183,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Improvisar o roteiro na hora da gravação
+                Pedir pro próprio dono do restaurante falar livremente na câmera sobre o negócio
               </button>
             </div>
           </div>
@@ -3049,9 +3247,8 @@
             </h2>
 
             <p class="result-text">
-              A gravação virou bagunça. A equipe refez 3 vezes, o cliente ficou impaciente e a
-              entrega atrasou. Improvisar roteiro de vídeo é apostar que tudo vai dar certo — e
-              quase nunca dá.
+              O dono falou por 4 minutos sem foco. O material era impossível de editar em 30 segundos.
+              A gravação precisou ser refeita com roteiro e o dia de produção foi perdido.
             </p>
 
             <button
@@ -3110,7 +3307,7 @@
                 class="choice-button is-bad"
                 type="button"
               >
-                Legendar tudo manualmente, assistindo e digitando
+                Usar o recurso automático de legenda do próprio Instagram ao publicar
               </button>
             </div>
           </div>
@@ -3173,9 +3370,8 @@
             </h2>
 
             <p class="result-text">
-              Camila conseguiu terminar 2 vídeos. Os outros 2 atrasaram o calendário do cliente e
-              ela ainda foi embora com dor nos olhos. Tarefa que a IA faz em minutos não deveria
-              custar horas humanas.
+              As legendas automáticas do Instagram tinham erros em nomes, produtos e termos técnicos.
+              Dois vídeos foram ao ar com erros que o cliente só identificou depois — e pediu repostagem.
             </p>
 
             <button
@@ -3216,6 +3412,14 @@
               Você acertou 0 de 16 decisões
             </div>
 
+            <button
+              id="rankingButton"
+              class="secondary-button ranking-button"
+              type="button"
+            >
+              🏆 Ver Ranking
+            </button>
+
             <p class="final-text">
               Na Adapt, cada área usa IA para trabalhar mais rápido, entregar melhor e crescer de
               verdade. Agora você sabe como isso funciona por dentro.
@@ -3236,6 +3440,57 @@
               type="button"
             >
               Jogar Novamente
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+        TELA DE RANKING AO VIVO
+      ========================================================== -->
+
+      <section
+        id="screen-ranking"
+        class="screen"
+        aria-labelledby="rankingTitle"
+      >
+        <div class="screen-card">
+          <div class="screen-content">
+            <div class="section-header">
+              <div class="eyebrow">
+                <span aria-hidden="true">🏆</span>
+                Ranking ao vivo
+              </div>
+
+              <h2 id="rankingTitle">Top 10 jogadores</h2>
+
+              <p class="subtitle">
+                Veja quem mandou melhor na Missão Adapt até agora.
+              </p>
+            </div>
+
+            <div
+              id="rankingStatus"
+              class="ranking-state"
+              role="status"
+              aria-live="polite"
+            >
+              Carregando ranking...
+            </div>
+
+            <div
+              id="rankingList"
+              class="ranking-list"
+              aria-label="Lista dos 10 melhores jogadores"
+            ></div>
+
+            <button
+              id="backFromRankingButton"
+              class="secondary-button"
+              type="button"
+            >
+              ← Voltar
             </button>
           </div>
         </div>
@@ -3297,6 +3552,13 @@
     const completedSectors = new Set();
     const totalDecisions = sectors.length * 2;
     let sectorNoticeTimeout = null;
+    let playerName = "";
+    let playerAge = "";
+    let playerEmail = "";
+    let resultSaved = false;
+
+    const supabaseUrl = "https://wmolvndzpputfqmkvzhl.supabase.co";
+    const supabaseKey = "sb_publishable_LMqy3KTDEiIyHa5vPvdIhA_JcwiYORC";
 
     /* =========================================================
       2. SELETORES DO DOM
@@ -3304,6 +3566,7 @@
 
     const screens = {
       welcome: document.getElementById("welcomeScreen"),
+      register: document.getElementById("screen-register"),
       sectors: document.getElementById("sectorScreen"),
       scenario: document.getElementById("scenarioScreen"),
       trafficScenarioOne: document.getElementById("trafficScenarioOneScreen"),
@@ -3354,7 +3617,8 @@
       audiovisualScenarioTwo: document.getElementById("audiovisualScenarioTwoScreen"),
       audiovisualScenarioTwoSuccess: document.getElementById("audiovisualScenarioTwoSuccessScreen"),
       audiovisualScenarioTwoFailure: document.getElementById("audiovisualScenarioTwoFailureScreen"),
-      final: document.getElementById("screen-final")
+      final: document.getElementById("screen-final"),
+      ranking: document.getElementById("screen-ranking")
     };
 
     const startButton = document.getElementById("startButton");
@@ -3370,6 +3634,18 @@
     const finalSubtitle = document.getElementById("finalSubtitle");
     const finalScoreText = document.getElementById("finalScoreText");
     const playAgainButton = document.getElementById("playAgainButton");
+    const rankingButton = document.getElementById("rankingButton");
+    const rankingStatus = document.getElementById("rankingStatus");
+    const rankingList = document.getElementById("rankingList");
+    const backFromRankingButton = document.getElementById("backFromRankingButton");
+
+    const registerForm = document.getElementById("registerForm");
+    const playerNameInput = document.getElementById("playerNameInput");
+    const playerAgeInput = document.getElementById("playerAgeInput");
+    const playerEmailInput = document.getElementById("playerEmailInput");
+    const playerNameError = document.getElementById("playerNameError");
+    const playerAgeError = document.getElementById("playerAgeError");
+    const playerEmailError = document.getElementById("playerEmailError");
 
     const scenarioEmoji = document.getElementById("scenarioEmoji");
     const scenarioTitle = document.getElementById("scenarioTitle");
@@ -3523,7 +3799,7 @@
     }
 
     function updateScoreVisibility(screenName) {
-      const shouldShowScore = screenName !== "welcome";
+      const shouldShowScore = !["welcome", "register"].includes(screenName);
       scorePill.classList.toggle("is-visible", shouldShowScore);
       progressPill.classList.toggle("is-visible", shouldShowScore);
     }
@@ -3639,6 +3915,11 @@
     function showFinalScreen() {
       updateFinalScreen();
       showScreen("final");
+
+      if (!resultSaved) {
+        resultSaved = true;
+        savePlayerResultToSupabase();
+      }
     }
 
     function completeSector(sectorId) {
@@ -3657,13 +3938,183 @@
     function resetGame() {
       score = 0;
       selectedSector = null;
+      playerName = "";
+      playerAge = "";
+      playerEmail = "";
+      resultSaved = false;
       completedSectors.clear();
       sectorNotice.classList.remove("is-visible");
       confettiLayer.innerHTML = "";
+      rankingList.innerHTML = "";
+      rankingStatus.textContent = "Carregando ranking...";
+      registerForm.reset();
+      clearRegisterErrors();
       updateScore();
       updateProgress();
       renderSectorCards();
       showScreen("welcome");
+    }
+
+    function setFieldError(input, errorElement, message) {
+      errorElement.textContent = message;
+      input.classList.toggle("is-invalid", Boolean(message));
+    }
+
+    function clearRegisterErrors() {
+      setFieldError(playerNameInput, playerNameError, "");
+      setFieldError(playerAgeInput, playerAgeError, "");
+      setFieldError(playerEmailInput, playerEmailError, "");
+    }
+
+    function validateRegisterForm() {
+      const nameValue = playerNameInput.value.trim();
+      const ageValue = playerAgeInput.value.trim();
+      const emailValue = playerEmailInput.value.trim();
+      let isValid = true;
+
+      clearRegisterErrors();
+
+      if (!nameValue) {
+        setFieldError(playerNameInput, playerNameError, "Informe seu nome completo.");
+        isValid = false;
+      }
+
+      if (!ageValue) {
+        setFieldError(playerAgeInput, playerAgeError, "Informe sua idade.");
+        isValid = false;
+      } else {
+        const ageNumber = Number(ageValue);
+
+        if (!Number.isFinite(ageNumber) || ageNumber < 10 || ageNumber > 99) {
+          setFieldError(playerAgeInput, playerAgeError, "Informe uma idade entre 10 e 99 anos.");
+          isValid = false;
+        }
+      }
+
+      if (!emailValue) {
+        setFieldError(playerEmailInput, playerEmailError, "Informe seu e-mail.");
+        isValid = false;
+      } else if (!playerEmailInput.checkValidity()) {
+        setFieldError(playerEmailInput, playerEmailError, "Informe um e-mail válido.");
+        isValid = false;
+      }
+
+      if (!isValid) {
+        return false;
+      }
+
+      playerName = nameValue;
+      playerAge = ageValue;
+      playerEmail = emailValue;
+      return true;
+    }
+
+    function handleRegisterSubmit(event) {
+      event.preventDefault();
+
+      if (!validateRegisterForm()) {
+        return;
+      }
+
+      showScreen("sectors");
+    }
+
+    async function savePlayerResultToSupabase() {
+      try {
+        await fetch(`${supabaseUrl}/rest/v1/players`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": supabaseKey,
+            "Authorization": `Bearer ${supabaseKey}`,
+            "Prefer": "return=minimal"
+          },
+          body: JSON.stringify({
+            name: playerName,
+            age: parseInt(playerAge, 10),
+            email: playerEmail,
+            score: score
+          })
+        });
+      } catch (err) {
+        console.error("Erro ao salvar:", err);
+      }
+    }
+
+    function createRankingItem(player, index) {
+      const item = document.createElement("div");
+      const position = document.createElement("span");
+      const name = document.createElement("span");
+      const points = document.createElement("span");
+      const medal = ["🥇", "🥈", "🥉"][index] || `${index + 1}º`;
+      const currentName = playerName.trim().toLowerCase();
+      const listedName = String(player.name || "Jogador").trim().toLowerCase();
+
+      item.className = "ranking-item";
+
+      if (currentName && listedName === currentName) {
+        item.classList.add("is-current");
+      }
+
+      position.className = "ranking-position";
+      position.textContent = index < 3 ? medal : `${index + 1}º`;
+
+      name.className = "ranking-name";
+      name.textContent = player.name || "Jogador sem nome";
+
+      points.className = "ranking-score";
+      points.textContent = `${player.score || 0} pts`;
+
+      item.appendChild(position);
+      item.appendChild(name);
+      item.appendChild(points);
+
+      return item;
+    }
+
+    function renderRanking(players) {
+      rankingList.innerHTML = "";
+
+      if (!players.length) {
+        rankingStatus.textContent = "Ainda não há jogadores no ranking.";
+        return;
+      }
+
+      rankingStatus.textContent = "";
+
+      players.forEach((player, index) => {
+        rankingList.appendChild(createRankingItem(player, index));
+      });
+    }
+
+    async function loadRanking() {
+      rankingStatus.textContent = "Carregando ranking...";
+      rankingList.innerHTML = "";
+
+      try {
+        const response = await fetch(`${supabaseUrl}/rest/v1/players?select=name,score&order=score.desc&limit=10`, {
+          method: "GET",
+          headers: {
+            "apikey": supabaseKey,
+            "Authorization": `Bearer ${supabaseKey}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro ${response.status}`);
+        }
+
+        const players = await response.json();
+        renderRanking(Array.isArray(players) ? players : []);
+      } catch (err) {
+        console.error("Erro ao carregar ranking:", err);
+        rankingStatus.textContent = "Não foi possível carregar o ranking agora.";
+      }
+    }
+
+    function showRankingScreen() {
+      showScreen("ranking");
+      loadRanking();
     }
 
     /* =========================================================
@@ -4046,11 +4497,25 @@
     ========================================================== */
 
     startButton.addEventListener("click", () => {
-      showScreen("sectors");
+      showScreen("register");
     });
 
     backButton.addEventListener("click", () => {
       goBackToSectors();
+    });
+
+    registerForm.addEventListener("submit", handleRegisterSubmit);
+
+    [playerNameInput, playerAgeInput, playerEmailInput].forEach((input) => {
+      input.addEventListener("input", clearRegisterErrors);
+    });
+
+    rankingButton.addEventListener("click", () => {
+      showRankingScreen();
+    });
+
+    backFromRankingButton.addEventListener("click", () => {
+      showScreen("final");
     });
 
     trafficScenarioOneGoodChoice.addEventListener("click", () => {
@@ -4341,6 +4806,7 @@
       - O setor Design já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
       - O setor Audiovisual já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
       - O jogo possui controle de setores concluídos, tela final, confete, feedback háptico e progresso no topo.
+      - O jogo possui cadastro antes da missão, salvamento silencioso no Supabase e ranking ao vivo.
     */
   </script>
 </body>
