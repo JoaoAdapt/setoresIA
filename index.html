@@ -672,51 +672,65 @@
       justify-content: center;
       gap: 10px;
       padding: 15px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: var(--radius-md);
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
       font-weight: 800;
       line-height: 1.25;
       text-align: center;
       transition:
         transform var(--transition),
         box-shadow var(--transition),
-        background var(--transition),
-        border-color var(--transition);
+        background 300ms ease,
+        border-color 300ms ease,
+        color 300ms ease,
+        opacity 300ms ease;
     }
 
-    .choice-button:hover {
+    .choice-button:not(:disabled):hover {
       transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.09);
+      box-shadow: 0 0 22px rgba(124, 58, 237, 0.13);
     }
 
-    .choice-button:active {
+    .choice-button:not(:disabled):active {
       transform: translateY(1px) scale(0.99);
     }
 
-    .choice-button.is-good {
-      color: #071107;
-      background: var(--neon);
-      box-shadow:
-        var(--shadow-neon),
-        inset 0 -4px 0 rgba(0, 0, 0, 0.18);
+    .choice-button:disabled {
+      cursor: not-allowed;
+      transform: none;
     }
 
-    .choice-button.is-good:hover {
-      box-shadow:
-        0 0 34px rgba(57, 255, 20, 0.42),
-        inset 0 -4px 0 rgba(0, 0, 0, 0.18);
+    .choice-button.is-revealed {
+      animation: choiceReveal 0.3s ease both;
     }
 
-    .choice-button.is-bad {
-      color: #fff1f2;
-      background: linear-gradient(145deg, #fb7185, #be123c);
-      box-shadow:
-        0 0 26px rgba(251, 113, 133, 0.24),
-        inset 0 -4px 0 rgba(0, 0, 0, 0.18);
+    .choice-button.is-revealed.is-good {
+      color: #ffffff;
+      background: rgba(57, 255, 20, 0.15);
+      border-color: #39ff14;
+      box-shadow: 0 0 26px rgba(57, 255, 20, 0.16);
     }
 
-    .choice-button.is-bad:hover {
-      box-shadow:
-        0 0 34px rgba(251, 113, 133, 0.34),
-        inset 0 -4px 0 rgba(0, 0, 0, 0.18);
+    .choice-button.is-revealed.is-bad {
+      color: rgba(255, 255, 255, 0.5);
+      background: rgba(239, 68, 68, 0.15);
+      border-color: #ef4444;
+      box-shadow: none;
+    }
+
+    @keyframes choiceReveal {
+      from {
+        opacity: 0.72;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .result-card {
@@ -1073,6 +1087,73 @@
       white-space: nowrap;
     }
 
+    .certificate-button {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: var(--text);
+      background: rgba(124, 58, 237, 0.18);
+      border: 1px solid rgba(124, 58, 237, 0.62);
+      box-shadow: 0 0 24px rgba(124, 58, 237, 0.16);
+    }
+
+    .certificate-button:hover {
+      border-color: rgba(124, 58, 237, 0.9);
+      box-shadow: 0 0 30px rgba(124, 58, 237, 0.28);
+    }
+
+    .easter-skull {
+      width: 136px;
+      height: 136px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 22px;
+      border-radius: 42px;
+      border: 1px solid rgba(251, 113, 133, 0.32);
+      background:
+        radial-gradient(circle at top, rgba(251, 113, 133, 0.28), transparent 54%),
+        linear-gradient(145deg, rgba(124, 58, 237, 0.34), rgba(255, 255, 255, 0.055));
+      box-shadow:
+        0 0 44px rgba(251, 113, 133, 0.18),
+        0 18px 48px rgba(124, 58, 237, 0.24);
+      font-size: 4.7rem;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      15% { transform: translateX(-8px) rotate(-8deg); }
+      30% { transform: translateX(8px) rotate(8deg); }
+      45% { transform: translateX(-6px) rotate(-5deg); }
+      60% { transform: translateX(6px) rotate(5deg); }
+      75% { transform: translateX(-3px) rotate(-2deg); }
+      90% { transform: translateX(3px) rotate(2deg); }
+    }
+
+    .shake {
+      animation: shake 0.7s ease-in-out infinite;
+    }
+
+    .easter-subtitle {
+      color: var(--danger);
+      font-size: 1.08rem;
+      line-height: 1.4;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .easter-divider {
+      width: 100%;
+      height: 1px;
+      margin: 22px 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    }
+
+    .easter-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
     /* =========================================================
       10. ESTADOS AUXILIARES E RESPONSIVIDADE
     ========================================================== */
@@ -1423,28 +1504,56 @@
 
             <div class="challenge-box">
               <p>
-                Thomas precisa analisar o relatório dos últimos 2 anos de campanha.
-                São planilhas, printscreens e PDFs. O cliente quer um resumo até amanhã.
-                Como você ajudaria Thomas?
+                
+                Thomas precisa analisar 2 anos de relatório de campanha até amanhã. São planilhas, PDFs e
+                printscreens empilhados. O cliente quer insights acionáveis, não só números. O que Thomas
+                faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 1 de Tráfego Pago">
+              
               <button
                 id="trafficScenarioOneGoodChoice"
-                class="choice-button is-good"
+                class="choice-button"
                 type="button"
+                data-scenario-id="trafego-c1"
+                data-choice-correct="true"
               >
-                Usar IA com um prompt estruturado para organizar e interpretar os dados
+                A — Usa IA com um prompt estruturado para cruzar os dados e identificar padrões de performance
               </button>
 
               <button
                 id="trafficScenarioOneBadChoice"
-                class="choice-button is-bad"
+                class="choice-button"
                 type="button"
+                data-scenario-id="trafego-c1"
+                data-choice-correct="false"
               >
-                Fazer um resumo rápido de cabeça com base no que lembra das campanhas
+                B — Faz um resumo de cabeça com base no que lembra das campanhas
               </button>
+
+              <button
+                id="trafficScenarioOneChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="trafego-c1"
+                data-choice-correct="false"
+              >
+                C — Pede mais 3 dias pro cliente para fazer uma análise manual completa
+              </button>
+
+              <button
+                id="trafficScenarioOneChoiceD"
+                class="choice-button"
+                type="button"
+                data-scenario-id="trafego-c1"
+                data-choice-correct="false"
+              >
+                D — Abre as planilhas e começa a criar gráficos manualmente no Excel
+              </button>
+            
             </div>
           </div>
         </div>
@@ -1507,8 +1616,11 @@
             </h2>
 
             <p class="result-text">
-              Thomas confiou na memória e apresentou números errados. O cliente questionou cada dado,
-              a credibilidade da análise inteira foi por água abaixo e a reunião terminou sem conclusão.
+              
+              Essa escolha parece razoável, mas tem uma falha. Thomas precisava de análise profunda com
+              dados reais — não de atalhos que parecem produtivos mas geram resultado superficial. IA com
+              prompt certo teria cruzado tudo em minutos.
+            
             </p>
 
             <button
@@ -1548,27 +1660,55 @@
 
             <div class="challenge-box">
               <p>
-                O cliente quer saber por que o CPC subiu 40% no último mês.
-                Thomas tem 1 hora para responder. O que ele faz?
+                
+                O CPC da campanha subiu 40% em 3 semanas. O cliente cobra explicação agora. Thomas tem 1
+                hora. O que ele faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de Tráfego Pago">
+              
               <button
-                id="trafficScenarioTwoGoodChoice"
-                class="choice-button is-good"
+                id="trafficScenarioTwoBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="trafego-c2"
+                data-choice-correct="false"
               >
-                Pedir pra IA cruzar os dados do período e identificar padrões antes de responder
+                A — Responde que está investigando e pede 24h sem olhar os dados
               </button>
 
               <button
-                id="trafficScenarioTwoBadChoice"
-                class="choice-button is-bad"
+                id="trafficScenarioTwoChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="trafego-c2"
+                data-choice-correct="false"
               >
-                Pedir mais 24h pro cliente para fazer uma análise completa manual
+                B — Abre o gerenciador de anúncios e começa a olhar manualmente cada conjunto
               </button>
+
+              <button
+                id="trafficScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="trafego-c2"
+                data-choice-correct="true"
+              >
+                C — Usa IA para cruzar dados do período, identificar variações e estruturar a resposta pro cliente
+              </button>
+
+              <button
+                id="trafficScenarioTwoChoiceD"
+                class="choice-button"
+                type="button"
+                data-scenario-id="trafego-c2"
+                data-choice-correct="false"
+              >
+                D — Culpa sazonalidade sem verificar os dados
+              </button>
+            
             </div>
           </div>
         </div>
@@ -1630,9 +1770,10 @@
             </h2>
 
             <p class="result-text">
-              O cliente interpretou o pedido como despreparo. Começou a questionar se a agência
-              realmente acompanha a conta no dia a dia. A confiança foi abalada por uma decisão
-              que parecia responsável.
+              
+              Parece uma ação lógica, mas não é a mais eficiente. Com 1 hora disponível, a IA cruzaria os
+              dados em minutos e Thomas chegaria na reunião com argumentos reais — não com suposições.
+            
             </p>
 
             <button
@@ -1668,32 +1809,60 @@
             </div>
 
             <h2 id="hrScenarioOneTitle" class="traffic-title">
-              Larissa — RH
+              Luana — RH
             </h2>
 
             <div class="challenge-box">
               <p>
-                Larissa precisa publicar 5 vagas diferentes até amanhã. Ela está olhando pra tela
-                em branco há 30 minutos sem saber por onde começar. O que você faria no lugar dela?
+                
+                Luana precisa publicar 5 vagas diferentes até amanhã. Cada uma exige tom, requisitos e
+                cultura diferentes. Ela está com a tela em branco. O que ela faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 1 de RH">
+              
               <button
-                id="hrScenarioOneGoodChoice"
-                class="choice-button is-good"
+                id="hrScenarioOneBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="rh-c1"
+                data-choice-correct="false"
               >
-                Usar IA com o briefing de cada vaga para gerar as descrições
+                A — Copia descrições de vagas de concorrentes e adapta superficialmente
               </button>
 
               <button
-                id="hrScenarioOneBadChoice"
-                class="choice-button is-bad"
+                id="hrScenarioOneChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="rh-c1"
+                data-choice-correct="false"
               >
-                Copiar descrições de vagas similares de outras empresas e adaptar
+                B — Escreve todas do zero, uma por uma, sem nenhum suporte
               </button>
+
+              <button
+                id="hrScenarioOneGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="rh-c1"
+                data-choice-correct="true"
+              >
+                C — Usa IA com o briefing de cada vaga para gerar, refinar e revisar as descrições
+              </button>
+
+              <button
+                id="hrScenarioOneChoiceD"
+                class="choice-button"
+                type="button"
+                data-scenario-id="rh-c1"
+                data-choice-correct="false"
+              >
+                D — Pede pro time de copy escrever, mesmo não sendo responsabilidade deles
+              </button>
+            
             </div>
           </div>
         </div>
@@ -1719,7 +1888,7 @@
             </h2>
 
             <p class="result-text">
-              5 descrições prontas, revisadas e publicadas em 45 minutos. Larissa ainda teve tempo
+              5 descrições prontas, revisadas e publicadas em 45 minutos. Luana ainda teve tempo
               de alinhar os critérios de triagem com o gestor. IA não escreve por você — mas
               transforma 4 horas em 45 minutos quando você sabe usar.
             </p>
@@ -1756,8 +1925,11 @@
             </h2>
 
             <p class="result-text">
-              As vagas ficaram genéricas, sem refletir a cultura da empresa. Os candidatos que se
-              inscreveram eram perfis errados e o processo seletivo inteiro teve que ser refeito do zero.
+              
+              Essa opção parece resolver o problema imediato, mas gera outro. Vagas genéricas ou fora do
+              escopo atraem perfis errados e sobrecarregam outros times. IA com briefing correto resolve
+              sem esses efeitos colaterais.
+            
             </p>
 
             <button
@@ -1792,32 +1964,60 @@
             </div>
 
             <h2 id="hrScenarioTwoTitle" class="traffic-title">
-              Larissa — RH
+              Luana — RH
             </h2>
 
             <div class="challenge-box">
               <p>
-                Larissa recebeu 80 currículos para uma vaga. Precisa fazer a triagem inicial ainda
-                hoje. Por onde ela começa?
+                
+                80 currículos chegaram para uma vaga. Luana precisa fazer triagem hoje. Cada currículo leva
+                em média 4 minutos para ler. O que ela faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de RH">
+              
               <button
-                id="hrScenarioTwoGoodChoice"
-                class="choice-button is-good"
+                id="hrScenarioTwoBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="rh-c2"
+                data-choice-correct="false"
               >
-                Usar IA para criar critérios de triagem e filtrar os perfis mais aderentes
+                A — Lê todos os 80 currículos em ordem de chegada
               </button>
 
               <button
-                id="hrScenarioTwoBadChoice"
-                class="choice-button is-bad"
+                id="hrScenarioTwoChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="rh-c2"
+                data-choice-correct="false"
               >
-                Pedir para o gestor de cada área fazer a triagem inicial sozinho
+                B — Filtra só pelos que têm a palavra-chave certa no título do cargo
               </button>
+
+              <button
+                id="hrScenarioTwoChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="rh-c2"
+                data-choice-correct="false"
+              >
+                C — Pede para o gestor da área fazer a triagem sozinho
+              </button>
+
+              <button
+                id="hrScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="rh-c2"
+                data-choice-correct="true"
+              >
+                D — Usa IA para definir critérios objetivos de triagem e filtrar os perfis mais aderentes
+              </button>
+            
             </div>
           </div>
         </div>
@@ -1843,7 +2043,7 @@
             </h2>
 
             <p class="result-text">
-              Triagem feita em 1 hora com critérios claros e documentados. Larissa identificou os
+              Triagem feita em 1 hora com critérios claros e documentados. Luana identificou os
               10 perfis mais aderentes e ainda teve energia pra conduzir as entrevistas no dia
               seguinte. Critério + velocidade = processo seletivo melhor.
             </p>
@@ -1879,8 +2079,11 @@
             </h2>
 
             <p class="result-text">
-              Cada gestor usou critérios diferentes. Os candidatos ficaram sem resposta por dias.
-              Dois perfis excelentes desistiram enquanto esperavam e fecharam com outras empresas.
+              
+              Parece um caminho razoável, mas tem falhas escondidas. Triagem por palavra-chave perde bons
+              perfis. Gestor sem critério padronizado gera inconsistência. Leitura manual de 80 currículos
+              leva 5h+ e fadiga. IA resolve em 1 hora com critério documentado.
+            
             </p>
 
             <button
@@ -1915,33 +2118,60 @@
             </div>
 
             <h2 id="commercialScenarioOneTitle" class="traffic-title">
-              Pedro — Comercial
+              Nadia — Comercial
             </h2>
 
             <div class="challenge-box">
               <p>
-                Pedro tem uma reunião com um cliente do setor de agropecuária em 1 hora.
-                Ele nunca trabalhou com esse segmento e não sabe nada sobre o mercado.
-                O que você faria no lugar dele?
+                
+                Nadia tem reunião com um cliente de agropecuária em 1 hora. Nunca trabalhou com o segmento.
+                O que ela faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 1 de Comercial">
+              
               <button
-                id="commercialScenarioOneGoodChoice"
-                class="choice-button is-good"
+                id="commercialScenarioOneBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="comercial-c1"
+                data-choice-correct="false"
               >
-                Usar IA para entender o setor, as dores comuns e o que esse tipo de empresa valoriza em marketing
+                A — Pesquisa o site e Instagram do cliente mas não estuda o mercado
               </button>
 
               <button
-                id="commercialScenarioOneBadChoice"
-                class="choice-button is-bad"
+                id="commercialScenarioOneChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="comercial-c1"
+                data-choice-correct="false"
               >
-                Pesquisar rapidamente o site e Instagram do cliente antes da reunião
+                B — Entra confiando no improviso e na experiência geral em vendas
               </button>
+
+              <button
+                id="commercialScenarioOneGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="comercial-c1"
+                data-choice-correct="true"
+              >
+                C — Usa IA para entender o segmento, dores comuns e o que esse tipo de empresa valoriza em marketing
+              </button>
+
+              <button
+                id="commercialScenarioOneChoiceD"
+                class="choice-button"
+                type="button"
+                data-scenario-id="comercial-c1"
+                data-choice-correct="false"
+              >
+                D — Liga para o cliente pedindo para remarcar a reunião
+              </button>
+            
             </div>
           </div>
         </div>
@@ -1967,7 +2197,7 @@
             </h2>
 
             <p class="result-text">
-              Pedro chegou preparado. Fez as perguntas certas, usou os termos do setor e transmitiu
+              Nadia chegou preparada. Fez as perguntas certas, usou os termos do setor e transmitiu
               credibilidade desde o início. A reunião fluiu, o cliente se sentiu ouvido e a proposta
               avançou. Preparação com IA é vantagem competitiva real.
             </p>
@@ -2004,9 +2234,11 @@
             </h2>
 
             <p class="result-text">
-              Pedro entendeu o visual da empresa mas não entendeu o mercado. Usou termos errados,
-              propôs soluções que não faziam sentido pro segmento e perdeu credibilidade logo
-              nos primeiros minutos.
+              
+              Essa escolha tem uma falha sutil. Conhecer o cliente visualmente não é conhecer o mercado.
+              Remarcar passa insegurança. Improvisar sem contexto gera respostas genéricas. Só entender o
+              segmento com profundidade garante credibilidade na reunião.
+            
             </p>
 
             <button
@@ -2041,33 +2273,60 @@
             </div>
 
             <h2 id="commercialScenarioTwoTitle" class="traffic-title">
-              Pedro — Comercial
+              Nadia — Comercial
             </h2>
 
             <div class="challenge-box">
               <p>
-                Pedro precisa montar uma proposta comercial personalizada para um lead quente.
-                O cliente pediu até amanhã. Pedro tem um modelo genérico salvo desde 2022.
-                O que ele faz?
+                
+                Um lead quente pediu uma proposta personalizada até amanhã. Nadia tem um template de 2022 e
+                anotações da reunião. O que ela faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de Comercial">
+              
               <button
-                id="commercialScenarioTwoGoodChoice"
-                class="choice-button is-good"
+                id="commercialScenarioTwoBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="comercial-c2"
+                data-choice-correct="false"
               >
-                Usar IA para estruturar a proposta com base no briefing do cliente
+                A — Usa o template de 2022 trocando nome e logo do cliente
               </button>
 
               <button
-                id="commercialScenarioTwoBadChoice"
-                class="choice-button is-bad"
+                id="commercialScenarioTwoChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="comercial-c2"
+                data-choice-correct="false"
               >
-                Montar a proposta rápido com base só no que o cliente falou na reunião
+                B — Escreve a proposta do zero sem nenhum suporte, só com as anotações
               </button>
+
+              <button
+                id="commercialScenarioTwoChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="comercial-c2"
+                data-choice-correct="false"
+              >
+                C — Pede mais 2 dias para fazer uma proposta mais elaborada
+              </button>
+
+              <button
+                id="commercialScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="comercial-c2"
+                data-choice-correct="true"
+              >
+                D — Usa IA para estruturar a proposta com base no briefing e nas dores levantadas na reunião
+              </button>
+            
             </div>
           </div>
         </div>
@@ -2129,8 +2388,11 @@
             </h2>
 
             <p class="result-text">
-              A proposta estava tecnicamente correta mas não conectou com as dores reais do cliente.
-              Pareceu feita pra qualquer empresa, não pra ele. O lead foi embora sem fechar.
+              
+              Parece responsável, mas tem custo. Template genérico o cliente percebe. Do zero sem suporte
+              leva horas. Pedir mais prazo em lead quente esfria o interesse. IA com briefing correto
+              entrega proposta personalizada em tempo hábil.
+            
             </p>
 
             <button
@@ -2165,33 +2427,60 @@
             </div>
 
             <h2 id="sdrScenarioOneTitle" class="traffic-title">
-              Ana — SDR
+              Murilo — SDR
             </h2>
 
             <div class="challenge-box">
               <p>
-                Ana tem 50 leads para qualificar hoje. A lista chegou de manhã e o dia já começou.
-                Se ela ligar para todos na ordem sem critério, vai perder tempo com leads frios.
-                O que você faria no lugar dela?
+                
+                Murilo tem 50 leads para qualificar hoje. Sem critério, vai perder tempo com leads frios. O
+                que ele faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 1 de SDR">
+              
               <button
-                id="sdrScenarioOneGoodChoice"
-                class="choice-button is-good"
+                id="sdrScenarioOneBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="sdr-c1"
+                data-choice-correct="false"
               >
-                Usar IA para criar um script de qualificação e priorizar os leads por potencial
+                A — Liga para todos em ordem de chegada sem priorização
               </button>
 
               <button
-                id="sdrScenarioOneBadChoice"
-                class="choice-button is-bad"
+                id="sdrScenarioOneChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="sdr-c1"
+                data-choice-correct="false"
               >
-                Focar nos leads que responderam o e-mail de prospecção e ignorar o resto por hoje
+                B — Foca nos leads que abriram o e-mail de prospecção, ignorando o resto
               </button>
+
+              <button
+                id="sdrScenarioOneChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="sdr-c1"
+                data-choice-correct="false"
+              >
+                C — Passa a lista para o comercial sem qualificar, alegando volume alto
+              </button>
+
+              <button
+                id="sdrScenarioOneGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="sdr-c1"
+                data-choice-correct="true"
+              >
+                D — Usa IA para criar critérios de qualificação e priorizar os leads com maior potencial
+              </button>
+            
             </div>
           </div>
         </div>
@@ -2217,7 +2506,7 @@
             </h2>
 
             <p class="result-text">
-              Ana focou nos 15 leads com mais potencial e agendou 4 reuniões no mesmo dia.
+              Murilo focou nos 15 leads com mais potencial e agendou 4 reuniões no mesmo dia.
               Os leads frios ficaram para depois. Priorização inteligente é o que separa SDR
               mediano de SDR de alto impacto.
             </p>
@@ -2254,9 +2543,11 @@
             </h2>
 
             <p class="result-text">
-              Os leads que responderam o e-mail eram curiosos, não qualificados. Os leads quentes
-              que não responderam estavam esperando uma ligação — e foram abordados pela concorrência
-              enquanto Ana perdia tempo.
+              
+              Essa escolha parece lógica mas tem armadilha. Abrir e-mail não significa interesse real.
+              Passar sem qualificar sobrecarrega o comercial. Ligar em ordem desperdiça o dia. Priorização
+              com critério claro é o que separa SDR mediano de SDR de alto impacto.
+            
             </p>
 
             <button
@@ -2291,33 +2582,60 @@
             </div>
 
             <h2 id="sdrScenarioTwoTitle" class="traffic-title">
-              Ana — SDR
+              Murilo — SDR
             </h2>
 
             <div class="challenge-box">
               <p>
-                Um lead respondeu o e-mail com dúvidas técnicas sobre tráfego pago. Ana não é
-                especialista no assunto e não quer passar para o time técnico sem antes entender
-                o que o lead quer. O que ela faz?
+                
+                Um lead respondeu com dúvidas técnicas sobre tráfego pago. Murilo não domina o assunto. O
+                que ele faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de SDR">
+              
               <button
-                id="sdrScenarioTwoGoodChoice"
-                class="choice-button is-good"
+                id="sdrScenarioTwoBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="sdr-c2"
+                data-choice-correct="false"
               >
-                Usar IA para entender a dúvida e formular uma resposta clara antes de passar para o especialista
+                A — Responde que vai verificar e retorna em breve, sem prazo definido
               </button>
 
               <button
-                id="sdrScenarioTwoBadChoice"
-                class="choice-button is-bad"
+                id="sdrScenarioTwoChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="sdr-c2"
+                data-choice-correct="false"
               >
-                Responder que vai verificar com o time técnico e retornar em breve, sem prazo definido
+                B — Encaminha o e-mail para o time técnico sem contexto adicional
               </button>
+
+              <button
+                id="sdrScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="sdr-c2"
+                data-choice-correct="true"
+              >
+                C — Usa IA para entender a dúvida, formular uma resposta clara e definir o próximo passo
+              </button>
+
+              <button
+                id="sdrScenarioTwoChoiceD"
+                class="choice-button"
+                type="button"
+                data-scenario-id="sdr-c2"
+                data-choice-correct="false"
+              >
+                D — Ignora a dúvida técnica e tenta agendar reunião direto
+              </button>
+            
             </div>
           </div>
         </div>
@@ -2343,7 +2661,7 @@
             </h2>
 
             <p class="result-text">
-              Ana respondeu com clareza, mostrou atenção e o lead sentiu que estava sendo bem
+              Murilo respondeu com clareza, mostrou atenção e o lead sentiu que estava sendo bem
               atendido. Reunião agendada. Quem usa IA para se preparar entrega uma experiência
               melhor — mesmo sem ser especialista no assunto.
             </p>
@@ -2379,8 +2697,11 @@
             </h2>
 
             <p class="result-text">
-              O lead ficou 2 dias sem resposta concreta. Interpretou o silêncio como desorganização
-              e fechou com outra agência que respondeu na mesma hora.
+              
+              Parece razoável transferir para quem sabe — mas a execução importa. Sem prazo o lead esfria.
+              Sem contexto o técnico não sabe o que responder. Ignorar a dúvida passa descaso. IA prepara
+              Murilo para responder com clareza e manter o lead engajado.
+            
             </p>
 
             <button
@@ -2395,7 +2716,7 @@
       </section>
 
       <!-- =========================================================
-        CS — CENÁRIO 1
+        ATENDIMENTO — CENÁRIO 1
       ========================================================== -->
 
       <section
@@ -2415,39 +2736,67 @@
             </div>
 
             <h2 id="csScenarioOneTitle" class="traffic-title">
-              Bruno — CS
+              Amanda — Atendimento
             </h2>
 
             <div class="challenge-box">
               <p>
-                Bruno recebeu um e-mail de um cliente insatisfeito com tom agressivo.
-                Ele está com raiva e quer responder na hora. O que você faria no lugar dele?
+                
+                Amanda recebeu um e-mail agressivo de cliente insatisfeito. Está irritada e quer responder
+                na hora. O que ela faz?
+              
               </p>
             </div>
 
-            <div class="choice-stack" aria-label="Escolhas do cenário 1 de CS">
+            <div class="choice-stack" aria-label="Escolhas do cenário 1 de Atendimento">
+              
               <button
-                id="csScenarioOneGoodChoice"
-                class="choice-button is-good"
+                id="csScenarioOneBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="cs-c1"
+                data-choice-correct="false"
               >
-                Usar IA para escrever uma resposta empática, profissional e que propõe solução
+                A — Responde imediatamente com o que está sentindo
               </button>
 
               <button
-                id="csScenarioOneBadChoice"
-                class="choice-button is-bad"
+                id="csScenarioOneChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="cs-c1"
+                data-choice-correct="false"
               >
-                Esperar o cliente se acalmar e responder só amanhã para não piorar a situação
+                B — Espera 24h para o cliente se acalmar, sem dar nenhum retorno
               </button>
+
+              <button
+                id="csScenarioOneChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="cs-c1"
+                data-choice-correct="false"
+              >
+                C — Encaminha para o diretor sem tentar resolver primeiro
+              </button>
+
+              <button
+                id="csScenarioOneGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="cs-c1"
+                data-choice-correct="true"
+              >
+                D — Usa IA para redigir uma resposta empática, profissional e com proposta de solução
+              </button>
+            
             </div>
           </div>
         </div>
       </section>
 
       <!-- =========================================================
-        CS — SUCESSO CENÁRIO 1
+        ATENDIMENTO — SUCESSO CENÁRIO 1
       ========================================================== -->
 
       <section
@@ -2466,7 +2815,7 @@
             </h2>
 
             <p class="result-text">
-              Bruno respondeu com calma, empatia e uma proposta concreta de solução. O cliente se
+              Amanda respondeu com calma, empatia e uma proposta concreta de solução. O cliente se
               acalmou e o relacionamento foi preservado. Em atendimento, a forma como você responde
               importa tanto quanto o que você responde.
             </p>
@@ -2484,7 +2833,7 @@
       </section>
 
       <!-- =========================================================
-        CS — FRACASSO CENÁRIO 1
+        ATENDIMENTO — FRACASSO CENÁRIO 1
       ========================================================== -->
 
       <section
@@ -2503,9 +2852,11 @@
             </h2>
 
             <p class="result-text">
-              O silêncio foi interpretado como descaso. O cliente postou uma reclamação pública
-              ainda naquela noite e escalou para o diretor. Uma resposta cuidadosa na hora teria
-              evitado tudo isso.
+              
+              Parece uma escolha segura, mas tem efeito colateral. Responder no impulso acirra. Silêncio
+              de 24h parece descaso. Escalar sem tentar resolver primeiro expõe a equipe. Resposta
+              empática com proposta concreta é o caminho que preserva o relacionamento.
+            
             </p>
 
             <button
@@ -2520,7 +2871,7 @@
       </section>
 
       <!-- =========================================================
-        CS — CENÁRIO 2
+        ATENDIMENTO — CENÁRIO 2
       ========================================================== -->
 
       <section
@@ -2540,39 +2891,67 @@
             </div>
 
             <h2 id="csScenarioTwoTitle" class="traffic-title">
-              Bruno — CS
+              Amanda — Atendimento
             </h2>
 
             <div class="challenge-box">
               <p>
-                Bruno precisa entregar relatórios mensais de resultados para 12 clientes até
-                sexta-feira. Hoje é quarta. O que ele faz?
+                
+                Amanda precisa entregar 12 relatórios mensais de resultados até sexta. Hoje é quarta. O que
+                ela faz?
+              
               </p>
             </div>
 
-            <div class="choice-stack" aria-label="Escolhas do cenário 2 de CS">
+            <div class="choice-stack" aria-label="Escolhas do cenário 2 de Atendimento">
+              
               <button
-                id="csScenarioTwoGoodChoice"
-                class="choice-button is-good"
+                id="csScenarioTwoBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="cs-c2"
+                data-choice-correct="false"
               >
-                Usar IA para criar um template de relatório e adaptar os dados de cada cliente
+                A — Faz cada relatório do zero, um por um, sem template
               </button>
 
               <button
-                id="csScenarioTwoBadChoice"
-                class="choice-button is-bad"
+                id="csScenarioTwoChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="cs-c2"
+                data-choice-correct="false"
               >
-                Usar o relatório do mês passado trocando só as datas e os principais números
+                B — Usa o relatório do mês passado trocando só datas e números principais
               </button>
+
+              <button
+                id="csScenarioTwoChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="cs-c2"
+                data-choice-correct="false"
+              >
+                C — Entrega apenas para os clientes mais importantes e deixa os outros para a próxima semana
+              </button>
+
+              <button
+                id="csScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="cs-c2"
+                data-choice-correct="true"
+              >
+                D — Usa IA para criar um template estruturado e adaptar os dados de cada cliente
+              </button>
+            
             </div>
           </div>
         </div>
       </section>
 
       <!-- =========================================================
-        CS — SUCESSO CENÁRIO 2
+        ATENDIMENTO — SUCESSO CENÁRIO 2
       ========================================================== -->
 
       <section
@@ -2591,7 +2970,7 @@
             </h2>
 
             <p class="result-text">
-              12 relatórios prontos na quinta. Bruno ainda teve tempo de revisar cada um com calma
+              12 relatórios prontos na quinta. Amanda ainda teve tempo de revisar cada um com calma
               e personalizar os comentários. Processo bem estruturado com IA = qualidade e escala
               ao mesmo tempo.
             </p>
@@ -2608,7 +2987,7 @@
       </section>
 
       <!-- =========================================================
-        CS — FRACASSO CENÁRIO 2
+        ATENDIMENTO — FRACASSO CENÁRIO 2
       ========================================================== -->
 
       <section
@@ -2627,8 +3006,11 @@
             </h2>
 
             <p class="result-text">
-              Dois clientes perceberam que o texto de análise estava idêntico ao mês anterior.
-              Sentiram que não eram acompanhados de verdade e abriram conversa sobre cancelamento.
+              
+              Essa escolha parece eficiente mas gera problema. Do zero sem template leva dias. Copiar do
+              mês passado clientes percebem. Priorizar alguns prejudica os outros. Template com IA entrega
+              12 relatórios personalizados em tempo hábil e com qualidade consistente.
+            
             </p>
 
             <button
@@ -2663,32 +3045,60 @@
             </div>
 
             <h2 id="copyScenarioOneTitle" class="traffic-title">
-              Júlia — Copy
+              Gian — Copy
             </h2>
 
             <div class="challenge-box">
               <p>
-                Júlia precisa criar 10 variações de headline para um anúncio de e-commerce.
-                O cliente quer para hoje. Ela está olhando para a tela em branco. O que você faria?
+                
+                Gian precisa criar 10 variações de headline para um anúncio de e-commerce. O cliente quer
+                hoje. O que ele faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 1 de Copy">
+              
               <button
-                id="copyScenarioOneGoodChoice"
-                class="choice-button is-good"
+                id="copyScenarioOneBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="copy-c1"
+                data-choice-correct="false"
               >
-                Usar IA com contexto do produto, público e objetivo para gerar e refinar as variações
+                A — Escreve 3 variações bem elaboradas e justifica a qualidade sobre quantidade
               </button>
 
               <button
-                id="copyScenarioOneBadChoice"
-                class="choice-button is-bad"
+                id="copyScenarioOneChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="copy-c1"
+                data-choice-correct="false"
               >
-                Criar 3 variações bem elaboradas em vez de entregar 10 mediocres
+                B — Pede extensão de prazo para fazer as 10 com mais qualidade
               </button>
+
+              <button
+                id="copyScenarioOneChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="copy-c1"
+                data-choice-correct="false"
+              >
+                C — Copia headlines de anúncios concorrentes e adapta o texto
+              </button>
+
+              <button
+                id="copyScenarioOneGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="copy-c1"
+                data-choice-correct="true"
+              >
+                D — Usa IA com contexto do produto, público e objetivo para gerar e refinar as 10 variações
+              </button>
+            
             </div>
           </div>
         </div>
@@ -2751,8 +3161,11 @@
             </h2>
 
             <p class="result-text">
-              O cliente precisava de 10 variações para testar em campanha. Com apenas 3, o teste A/B
-              ficou inconclusivo e ele questionou o volume entregue, pedindo o restante com urgência.
+              
+              Parece defensável — mas não é o que o cliente pediu. 3 variações limitam o teste A/B.
+              Prorrogação em entrega simples passa insegurança. Copiar concorrente é arriscado e
+              preguiçoso. IA com contexto certo entrega 10 variações únicas e alinhadas em minutos.
+            
             </p>
 
             <button
@@ -2787,32 +3200,59 @@
             </div>
 
             <h2 id="copyScenarioTwoTitle" class="traffic-title">
-              Júlia — Copy
+              Gian — Copy
             </h2>
 
             <div class="challenge-box">
               <p>
-                Júlia recebeu um briefing confuso do cliente. Não ficou claro o tom, o público nem
-                o objetivo. O que ela faz?
+                
+                Gian recebeu um briefing confuso. Tom, público e objetivo estão vagos. O que ele faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de Copy">
+              
               <button
-                id="copyScenarioTwoGoodChoice"
-                class="choice-button is-good"
+                id="copyScenarioTwoBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="copy-c2"
+                data-choice-correct="false"
               >
-                Usar IA para interpretar o briefing, identificar lacunas e montar as perguntas certas para o cliente
+                A — Começa a escrever com base no que interpretou, sem perguntar nada
               </button>
 
               <button
-                id="copyScenarioTwoBadChoice"
-                class="choice-button is-bad"
+                id="copyScenarioTwoChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="copy-c2"
+                data-choice-correct="false"
               >
-                Pedir uma reunião de alinhamento com o cliente antes de começar qualquer coisa
+                B — Devolve o briefing pedindo que o cliente preencha um formulário padrão
               </button>
+
+              <button
+                id="copyScenarioTwoChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="copy-c2"
+                data-choice-correct="false"
+              >
+                C — Agenda uma reunião de alinhamento antes de escrever qualquer coisa
+              </button>
+
+              <button
+                id="copyScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="copy-c2"
+                data-choice-correct="true"
+              >
+                D — Usa IA para interpretar o briefing, identificar as lacunas e montar as perguntas certas para o cliente
+              </button>
+            
             </div>
           </div>
         </div>
@@ -2838,7 +3278,7 @@
             </h2>
 
             <p class="result-text">
-              Júlia fez as perguntas certas, alinhou a expectativa antes de escrever uma linha e
+              Gian fez as perguntas certas, alinhou a expectativa antes de escrever uma linha e
               entregou certeiro na primeira vez. Briefing bem resolvido é metade do trabalho de
               copy feito.
             </p>
@@ -2874,9 +3314,11 @@
             </h2>
 
             <p class="result-text">
-              O cliente achou que a agência estava enrolando. Questionou por que precisava de reunião
-              para uma tarefa simples. A relação de confiança começou a rachar antes de uma linha
-              ser escrita.
+              
+              Cada opção tem uma falha. Escrever sem alinhar gera retrabalho. Formulário padrão engessa a
+              conversa. Reunião para briefing simples é exagero. IA identifica exatamente o que está
+              faltando e prepara Gian para um alinhamento rápido e cirúrgico.
+            
             </p>
 
             <button
@@ -2911,33 +3353,60 @@
             </div>
 
             <h2 id="designScenarioOneTitle" class="traffic-title">
-              Rafael — Design
+              Fran — Design
             </h2>
 
             <div class="challenge-box">
               <p>
-                Rafael precisa passar um briefing detalhado para o designer sobre um cliente novo.
-                Ele só tem as anotações bagunçadas da reunião. O designer precisa começar hoje.
-                O que você faria?
+                
+                Fran precisa passar um briefing detalhado para o designer sobre um cliente novo. Só tem
+                anotações bagunçadas da reunião. O que ela faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 1 de Design">
+              
               <button
-                id="designScenarioOneGoodChoice"
-                class="choice-button is-good"
+                id="designScenarioOneBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="design-c1"
+                data-choice-correct="false"
               >
-                Usar IA para organizar as anotações e transformar em briefing estruturado
+                A — Manda as anotações brutas e pede para o designer interpretar
               </button>
 
               <button
-                id="designScenarioOneBadChoice"
-                class="choice-button is-bad"
+                id="designScenarioOneChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="design-c1"
+                data-choice-correct="false"
               >
-                Fazer uma reunião rápida de 15 minutos com o designer para explicar verbalmente
+                B — Faz uma reunião verbal de 15 minutos sem documentar nada
               </button>
+
+              <button
+                id="designScenarioOneChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="design-c1"
+                data-choice-correct="false"
+              >
+                C — Pede para o cliente reescrever o briefing antes de passar para o designer
+              </button>
+
+              <button
+                id="designScenarioOneGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="design-c1"
+                data-choice-correct="true"
+              >
+                D — Usa IA para organizar as anotações e transformar em briefing estruturado
+              </button>
+            
             </div>
           </div>
         </div>
@@ -3000,8 +3469,12 @@
             </h2>
 
             <p class="result-text">
-              O designer entendeu na reunião mas esqueceu detalhes importantes na execução. Sem nada
-              documentado, Rafael não conseguiu provar o que foi combinado quando o cliente rejeitou a peça.
+              
+              Todas as outras opções têm falha escondida. Anotações brutas geram interpretação errada.
+              Reunião verbal sem documentação some da memória. Pedir pro cliente reescrever passa
+              insegurança. Briefing estruturado com IA dá ao designer tudo que ele precisa para executar
+              certo de primeira.
+            
             </p>
 
             <button
@@ -3036,32 +3509,60 @@
             </div>
 
             <h2 id="designScenarioTwoTitle" class="traffic-title">
-              Rafael — Design
+              Fran — Design
             </h2>
 
             <div class="challenge-box">
               <p>
-                O cliente pediu uma identidade visual 'moderna e jovem'. Rafael não sabe como
-                transformar isso em referências concretas para o designer. O que ele faz?
+                
+                O cliente pediu identidade visual 'moderna e jovem'. Fran não sabe como transformar isso em
+                direção concreta. O que ela faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de Design">
+              
               <button
-                id="designScenarioTwoGoodChoice"
-                class="choice-button is-good"
+                id="designScenarioTwoBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="design-c2"
+                data-choice-correct="false"
               >
-                Usar IA para expandir o conceito em referências visuais, paleta, tipografia e exemplos de mercado
+                A — Repassa 'moderno e jovem' para o designer e espera o resultado
               </button>
 
               <button
-                id="designScenarioTwoBadChoice"
-                class="choice-button is-bad"
+                id="designScenarioTwoChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="design-c2"
+                data-choice-correct="false"
               >
-                Mandar 3 prints de concorrentes como referência sem contexto adicional
+                B — Manda 3 prints de concorrentes como referência sem contexto
               </button>
+
+              <button
+                id="designScenarioTwoChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="design-c2"
+                data-choice-correct="false"
+              >
+                C — Pede para o cliente enviar exemplos que ele gosta antes de qualquer coisa
+              </button>
+
+              <button
+                id="designScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="design-c2"
+                data-choice-correct="true"
+              >
+                D — Usa IA para expandir o conceito em referências visuais, paleta, tipografia e exemplos de mercado
+              </button>
+            
             </div>
           </div>
         </div>
@@ -3123,8 +3624,11 @@
             </h2>
 
             <p class="result-text">
-              O designer replicou o estilo dos concorrentes diretos. O cliente reconheceu a semelhança
-              imediatamente, ficou constrangido e pediu uma identidade que fosse realmente única.
+              
+              Parece razoável em cada caso — mas todas falham. Conceito vago gera resultado genérico.
+              Concorrente como referência pode gerar cópia. Esperar o cliente atrasa o processo. IA
+              transforma conceito subjetivo em direção visual concreta que o designer consegue executar.
+            
             </p>
 
             <button
@@ -3159,32 +3663,60 @@
             </div>
 
             <h2 id="audiovisualScenarioOneTitle" class="traffic-title">
-              Camila — Audiovisual
+              Morgana — Audiovisual
             </h2>
 
             <div class="challenge-box">
               <p>
-                Camila precisa roteirizar um vídeo de 30 segundos para um cliente de restaurante.
-                Nunca trabalhou com esse segmento e a gravação começa em 2 horas. O que você faria?
+                
+                Morgana precisa roteirizar um vídeo de 30 segundos para um restaurante. Nunca trabalhou com
+                o segmento. Gravação em 2 horas. O que ela faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 1 de Audiovisual">
+              
               <button
-                id="audiovisualScenarioOneGoodChoice"
-                class="choice-button is-good"
+                id="audiovisualScenarioOneBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="audiovisual-c1"
+                data-choice-correct="false"
               >
-                Usar IA com contexto do cliente, público e objetivo para estruturar o roteiro
+                A — Pede pro dono do restaurante falar livremente na câmera
               </button>
 
               <button
-                id="audiovisualScenarioOneBadChoice"
-                class="choice-button is-bad"
+                id="audiovisualScenarioOneChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="audiovisual-c1"
+                data-choice-correct="false"
               >
-                Pedir pro próprio dono do restaurante falar livremente na câmera sobre o negócio
+                B — Improvisa o roteiro na hora da gravação com base no feeling
               </button>
+
+              <button
+                id="audiovisualScenarioOneChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="audiovisual-c1"
+                data-choice-correct="false"
+              >
+                C — Usa um roteiro genérico de outro cliente de alimentação que deu certo antes
+              </button>
+
+              <button
+                id="audiovisualScenarioOneGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="audiovisual-c1"
+                data-choice-correct="true"
+              >
+                D — Usa IA com contexto do cliente, público e objetivo para estruturar o roteiro
+              </button>
+            
             </div>
           </div>
         </div>
@@ -3210,7 +3742,7 @@
             </h2>
 
             <p class="result-text">
-              Roteiro claro, gravação fluida, vídeo aprovado de primeira. Camila ainda teve tempo
+              Roteiro claro, gravação fluida, vídeo aprovado de primeira. Morgana ainda teve tempo
               de passar o roteiro pro cliente validar antes de gravar. Preparação evita retrabalho —
               e retrabalho em audiovisual é caro.
             </p>
@@ -3247,8 +3779,11 @@
             </h2>
 
             <p class="result-text">
-              O dono falou por 4 minutos sem foco. O material era impossível de editar em 30 segundos.
-              A gravação precisou ser refeita com roteiro e o dia de produção foi perdido.
+              
+              Cada opção tem uma armadilha. Dono falando livremente gera 4 minutos sem foco. Improviso
+              vira refilmagem. Roteiro genérico não captura a essência do cliente. IA com contexto certo
+              gera roteiro específico, objetivo e validável antes da gravação.
+            
             </p>
 
             <button
@@ -3283,32 +3818,60 @@
             </div>
 
             <h2 id="audiovisualScenarioTwoTitle" class="traffic-title">
-              Camila — Audiovisual
+              Morgana — Audiovisual
             </h2>
 
             <div class="challenge-box">
               <p>
-                Camila tem 4 vídeos para legendar e publicar até o fim do dia. São 40 minutos de
-                conteúdo no total. O que ela faz?
+                
+                Morgana tem 4 vídeos para legendar e publicar até o fim do dia. 40 minutos de conteúdo
+                total. O que ela faz?
+              
               </p>
             </div>
 
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de Audiovisual">
+              
               <button
-                id="audiovisualScenarioTwoGoodChoice"
-                class="choice-button is-good"
+                id="audiovisualScenarioTwoBadChoice"
+                class="choice-button"
                 type="button"
+                data-scenario-id="audiovisual-c2"
+                data-choice-correct="false"
               >
-                Usar IA para transcrever e adaptar as legendas de cada vídeo
+                A — Legenda manualmente assistindo e digitando tudo
               </button>
 
               <button
-                id="audiovisualScenarioTwoBadChoice"
-                class="choice-button is-bad"
+                id="audiovisualScenarioTwoChoiceB"
+                class="choice-button"
                 type="button"
+                data-scenario-id="audiovisual-c2"
+                data-choice-correct="false"
               >
-                Usar o recurso automático de legenda do próprio Instagram ao publicar
+                B — Usa a legenda automática do Instagram ao publicar sem revisar
               </button>
+
+              <button
+                id="audiovisualScenarioTwoChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="audiovisual-c2"
+                data-choice-correct="false"
+              >
+                C — Publica sem legenda e adiciona depois quando tiver tempo
+              </button>
+
+              <button
+                id="audiovisualScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="audiovisual-c2"
+                data-choice-correct="true"
+              >
+                D — Usa IA para transcrever e adaptar as legendas, revisando antes de publicar
+              </button>
+            
             </div>
           </div>
         </div>
@@ -3334,7 +3897,7 @@
             </h2>
 
             <p class="result-text">
-              4 vídeos prontos em 2 horas. Camila ainda revisou a qualidade de cada legenda com
+              4 vídeos prontos em 2 horas. Morgana ainda revisou a qualidade de cada legenda com
               calma antes de publicar. Tarefa repetitiva com IA = tempo liberado para o que exige
               criatividade.
             </p>
@@ -3370,8 +3933,11 @@
             </h2>
 
             <p class="result-text">
-              As legendas automáticas do Instagram tinham erros em nomes, produtos e termos técnicos.
-              Dois vídeos foram ao ar com erros que o cliente só identificou depois — e pediu repostagem.
+              
+              Cada atalho tem custo. Manual leva horas e cansa. Automático do Instagram erra nomes e
+              termos técnicos. Sem legenda prejudica acessibilidade e alcance. IA transcreve rápido e
+              Morgana revisa com qualidade — sem perder o prazo nem a precisão.
+            
             </p>
 
             <button
@@ -3409,8 +3975,16 @@
             </p>
 
             <div id="finalScoreText" class="final-score">
-              Você acertou 0 de 16 decisões
+              Você acertou 0 de 32 pontos
             </div>
+
+            <button
+              id="certificateButton"
+              class="secondary-button certificate-button"
+              type="button"
+            >
+              🏅 Baixar Meu Certificado
+            </button>
 
             <button
               id="rankingButton"
@@ -3440,6 +4014,53 @@
               type="button"
             >
               Jogar Novamente
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =========================================================
+        EASTER EGG — DEMISSÃO
+      ========================================================== -->
+
+      <section
+        id="screen-easter-egg"
+        class="screen"
+        aria-labelledby="easterEggTitle"
+      >
+        <div class="screen-card final-card">
+          <div class="screen-content">
+            <div class="easter-skull shake" aria-hidden="true">
+              💀
+            </div>
+
+            <h2 id="easterEggTitle" class="final-title">
+              Você foi demitido.
+            </h2>
+
+            <p class="easter-subtitle">
+              No primeiro dia.
+            </p>
+
+            <p class="final-text">
+              16 decisões. 16 erros. Isso é quase um talento. Mas calma — na Adapt a gente aprende
+              com os erros. Tenta de novo e dessa vez pensa antes de clicar.
+            </p>
+
+            <div class="easter-divider" aria-hidden="true"></div>
+
+            <p class="easter-note">
+              Curiosidade: você é o tipo de pessoa que ignora IA completamente ou a usa do jeito errado.
+              Os dois têm conserto.
+            </p>
+
+            <button
+              id="playAgainFromEasterButton"
+              class="primary-button"
+              type="button"
+            >
+              Tentar Não Ser Demitido de Novo
             </button>
           </div>
         </div>
@@ -3529,7 +4150,7 @@
       },
       {
         id: "cs",
-        name: "CS",
+        name: "Atendimento",
         emoji: "🤝"
       },
       {
@@ -3550,7 +4171,9 @@
     ];
 
     const completedSectors = new Set();
-    const totalDecisions = sectors.length * 2;
+    const totalScenarios = sectors.length * 2;
+    const maxScore = totalScenarios * 2;
+    const scenarioAttempts = {};
     let sectorNoticeTimeout = null;
     let playerName = "";
     let playerAge = "";
@@ -3618,6 +4241,7 @@
       audiovisualScenarioTwoSuccess: document.getElementById("audiovisualScenarioTwoSuccessScreen"),
       audiovisualScenarioTwoFailure: document.getElementById("audiovisualScenarioTwoFailureScreen"),
       final: document.getElementById("screen-final"),
+      easterEgg: document.getElementById("screen-easter-egg"),
       ranking: document.getElementById("screen-ranking")
     };
 
@@ -3634,6 +4258,8 @@
     const finalSubtitle = document.getElementById("finalSubtitle");
     const finalScoreText = document.getElementById("finalScoreText");
     const playAgainButton = document.getElementById("playAgainButton");
+    const playAgainFromEasterButton = document.getElementById("playAgainFromEasterButton");
+    const certificateButton = document.getElementById("certificateButton");
     const rankingButton = document.getElementById("rankingButton");
     const rankingStatus = document.getElementById("rankingStatus");
     const rankingList = document.getElementById("rankingList");
@@ -3734,8 +4360,44 @@
       3. FUNÇÕES DE PLACAR
     ========================================================== */
 
-    function updateScore() {
-      scoreText.textContent = `${score} ${score === 1 ? "ponto" : "pontos"}`;
+    function formatScore(value) {
+      return Number.isInteger(value) ? String(value) : value.toFixed(1);
+    }
+
+    function updateScoreDisplay() {
+      const formattedScore = formatScore(score);
+      scoreText.textContent = `${formattedScore} ${score === 1 ? "ponto" : "pontos"}`;
+    }
+
+    function registerAttempt(scenarioId) {
+      if (!scenarioAttempts[scenarioId]) {
+        scenarioAttempts[scenarioId] = 0;
+      }
+
+      scenarioAttempts[scenarioId] += 1;
+    }
+
+    function addPointForScenario(scenarioId) {
+      const attempts = scenarioAttempts[scenarioId] || 1;
+      let points = 0;
+
+      if (attempts === 1) {
+        points = 2;
+      } else if (attempts === 2) {
+        points = 1;
+      } else {
+        points = 0.5;
+      }
+
+      score += points;
+      updateScoreDisplay();
+      triggerSuccessFeedback();
+    }
+
+    function resetScenarioAttempts() {
+      Object.keys(scenarioAttempts).forEach((scenarioId) => {
+        delete scenarioAttempts[scenarioId];
+      });
     }
 
     function updateProgress() {
@@ -3781,12 +4443,6 @@
       triggerHaptic([60, 30, 60]);
     }
 
-    function addPoint() {
-      score += 1;
-      updateScore();
-      triggerSuccessFeedback();
-    }
-
     /* =========================================================
       4. FUNÇÕES DE NAVEGAÇÃO ENTRE TELAS
     ========================================================== */
@@ -3817,6 +4473,7 @@
       );
 
       updateScoreVisibility(screenName);
+      resetChoiceButtons(nextScreen);
 
       if (screenName.toLowerCase().includes("failure")) {
         triggerFailureFeedback();
@@ -3896,11 +4553,11 @@
     }
 
     function getFinalSubtitle() {
-      if (score >= 14) {
+      if (score >= 28) {
         return "Você nasceu pra isso. IA na veia.";
       }
 
-      if (score >= 10) {
+      if (score >= 20) {
         return "Muito bom. Você sabe usar as ferramentas certas.";
       }
 
@@ -3909,17 +4566,23 @@
 
     function updateFinalScreen() {
       finalSubtitle.textContent = getFinalSubtitle();
-      finalScoreText.textContent = `Você acertou ${score} de ${totalDecisions} decisões`;
+      finalScoreText.textContent = `Você acertou ${formatScore(score)} de ${maxScore} pontos`;
     }
 
     function showFinalScreen() {
       updateFinalScreen();
-      showScreen("final");
 
       if (!resultSaved) {
         resultSaved = true;
         savePlayerResultToSupabase();
       }
+
+      if (score === 0) {
+        showScreen("easterEgg");
+        return;
+      }
+
+      showScreen("final");
     }
 
     function completeSector(sectorId) {
@@ -3943,13 +4606,14 @@
       playerEmail = "";
       resultSaved = false;
       completedSectors.clear();
+      resetScenarioAttempts();
       sectorNotice.classList.remove("is-visible");
       confettiLayer.innerHTML = "";
       rankingList.innerHTML = "";
       rankingStatus.textContent = "Carregando ranking...";
       registerForm.reset();
       clearRegisterErrors();
-      updateScore();
+      updateScoreDisplay();
       updateProgress();
       renderSectorCards();
       showScreen("welcome");
@@ -4063,7 +4727,7 @@
       name.textContent = player.name || "Jogador sem nome";
 
       points.className = "ranking-score";
-      points.textContent = `${player.score || 0} pts`;
+      points.textContent = `${formatScore(Number(player.score || 0))} pts`;
 
       item.appendChild(position);
       item.appendChild(name);
@@ -4110,6 +4774,186 @@
         console.error("Erro ao carregar ranking:", err);
         rankingStatus.textContent = "Não foi possível carregar o ranking agora.";
       }
+    }
+
+    function drawRoundedRect(context, x, y, width, height, radius) {
+      const normalizedRadius = Math.min(radius, width / 2, height / 2);
+
+      context.beginPath();
+      context.moveTo(x + normalizedRadius, y);
+      context.lineTo(x + width - normalizedRadius, y);
+      context.quadraticCurveTo(x + width, y, x + width, y + normalizedRadius);
+      context.lineTo(x + width, y + height - normalizedRadius);
+      context.quadraticCurveTo(x + width, y + height, x + width - normalizedRadius, y + height);
+      context.lineTo(x + normalizedRadius, y + height);
+      context.quadraticCurveTo(x, y + height, x, y + height - normalizedRadius);
+      context.lineTo(x, y + normalizedRadius);
+      context.quadraticCurveTo(x, y, x + normalizedRadius, y);
+      context.closePath();
+    }
+
+    function drawCenteredText(context, text, x, y, font, color) {
+      context.font = font;
+      context.fillStyle = color;
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillText(text, x, y);
+    }
+
+    function drawLetterSpacedText(context, text, x, y, font, color, spacing) {
+      context.font = font;
+      context.fillStyle = color;
+      context.textAlign = "left";
+      context.textBaseline = "middle";
+
+      const letters = text.split("");
+      const totalWidth = letters.reduce((width, letter) => width + context.measureText(letter).width, 0) + spacing * (letters.length - 1);
+      let currentX = x - totalWidth / 2;
+
+      letters.forEach((letter) => {
+        context.fillText(letter, currentX, y);
+        currentX += context.measureText(letter).width + spacing;
+      });
+    }
+
+    function generateCertificate() {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      const width = 900;
+      const height = 600;
+      const centerX = width / 2;
+      const certificateName = (playerName || "Aluno(a)").trim().toUpperCase();
+      const nameFontSize = certificateName.length > 24 ? 36 : 48;
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const background = context.createLinearGradient(0, 0, width, height);
+      background.addColorStop(0, "#0d0d0d");
+      background.addColorStop(1, "#1a0a2e");
+      context.fillStyle = background;
+      context.fillRect(0, 0, width, height);
+
+      context.strokeStyle = "rgba(255, 255, 255, 0.04)";
+      context.lineWidth = 1;
+
+      for (let x = 0; x <= width; x += 40) {
+        context.beginPath();
+        context.moveTo(x, 0);
+        context.lineTo(x, height);
+        context.stroke();
+      }
+
+      for (let y = 0; y <= height; y += 40) {
+        context.beginPath();
+        context.moveTo(0, y);
+        context.lineTo(width, y);
+        context.stroke();
+      }
+
+      drawRoundedRect(context, 20, 20, width - 40, height - 40, 20);
+      context.strokeStyle = "#39ff14";
+      context.lineWidth = 2;
+      context.stroke();
+
+      drawRoundedRect(context, 30, 30, width - 60, height - 60, 14);
+      context.strokeStyle = "rgba(124, 58, 237, 0.5)";
+      context.lineWidth = 1;
+      context.stroke();
+
+      drawLetterSpacedText(
+        context,
+        "ADAPT ESTRATÉGIAS DIGITAIS",
+        centerX,
+        80,
+        "700 18px 'Space Grotesk', Arial, sans-serif",
+        "#39ff14",
+        2
+      );
+
+      drawCenteredText(
+        context,
+        "CERTIFICADO DE CONCLUSÃO",
+        centerX,
+        130,
+        "700 32px 'Space Grotesk', Arial, sans-serif",
+        "#f4f4f5"
+      );
+
+      context.strokeStyle = "rgba(57, 255, 20, 0.4)";
+      context.lineWidth = 1;
+      context.beginPath();
+      context.moveTo(centerX - 100, 175);
+      context.lineTo(centerX + 100, 175);
+      context.stroke();
+
+      drawCenteredText(
+        context,
+        "Este certificado é concedido a",
+        centerX,
+        210,
+        "400 16px Inter, Arial, sans-serif",
+        "#a1a1aa"
+      );
+
+      drawCenteredText(
+        context,
+        certificateName,
+        centerX,
+        270,
+        `700 ${nameFontSize}px 'Space Grotesk', Arial, sans-serif`,
+        "#f4f4f5"
+      );
+
+      context.strokeStyle = "rgba(57, 255, 20, 0.4)";
+      context.lineWidth = 1;
+      context.beginPath();
+      context.moveTo(centerX - 100, 320);
+      context.lineTo(centerX + 100, 320);
+      context.stroke();
+
+      drawCenteredText(
+        context,
+        "por completar a Missão Adapt com",
+        centerX,
+        360,
+        "400 16px Inter, Arial, sans-serif",
+        "#a1a1aa"
+      );
+
+      drawCenteredText(
+        context,
+        `${formatScore(score)} de ${maxScore} pontos`,
+        centerX,
+        410,
+        "700 36px 'Space Grotesk', Arial, sans-serif",
+        "#39ff14"
+      );
+
+      drawCenteredText(
+        context,
+        "Missão Adapt · Adapt Estratégias Digitais · 2025",
+        centerX,
+        460,
+        "400 13px Inter, Arial, sans-serif",
+        "rgba(161, 161, 170, 0.6)"
+      );
+
+      drawCenteredText(
+        context,
+        "adaptdigital.com.br",
+        centerX,
+        530,
+        "700 14px 'Space Grotesk', Arial, sans-serif",
+        "rgba(57, 255, 20, 0.7)"
+      );
+
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png");
+      link.download = "certificado-missao-adapt.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
 
     function showRankingScreen() {
@@ -4195,7 +5039,7 @@
     }
 
     function showTrafficScenarioOneSuccess() {
-      addPoint();
+      addPointForScenario("trafego-c1");
       showScreen("trafficScenarioOneSuccess");
     }
 
@@ -4208,7 +5052,7 @@
     }
 
     function showTrafficScenarioTwoSuccess() {
-      addPoint();
+      addPointForScenario("trafego-c2");
       showScreen("trafficScenarioTwoSuccess");
     }
 
@@ -4233,7 +5077,7 @@
     }
 
     function showHrScenarioOneSuccess() {
-      addPoint();
+      addPointForScenario("rh-c1");
       showScreen("hrScenarioOneSuccess");
     }
 
@@ -4246,7 +5090,7 @@
     }
 
     function showHrScenarioTwoSuccess() {
-      addPoint();
+      addPointForScenario("rh-c2");
       showScreen("hrScenarioTwoSuccess");
     }
 
@@ -4271,7 +5115,7 @@
     }
 
     function showCommercialScenarioOneSuccess() {
-      addPoint();
+      addPointForScenario("comercial-c1");
       showScreen("commercialScenarioOneSuccess");
     }
 
@@ -4284,7 +5128,7 @@
     }
 
     function showCommercialScenarioTwoSuccess() {
-      addPoint();
+      addPointForScenario("comercial-c2");
       showScreen("commercialScenarioTwoSuccess");
     }
 
@@ -4309,7 +5153,7 @@
     }
 
     function showSdrScenarioOneSuccess() {
-      addPoint();
+      addPointForScenario("sdr-c1");
       showScreen("sdrScenarioOneSuccess");
     }
 
@@ -4322,7 +5166,7 @@
     }
 
     function showSdrScenarioTwoSuccess() {
-      addPoint();
+      addPointForScenario("sdr-c2");
       showScreen("sdrScenarioTwoSuccess");
     }
 
@@ -4339,7 +5183,7 @@
     }
 
     /* =========================================================
-      11. FLUXO — CS
+      11. FLUXO — ATENDIMENTO
     ========================================================== */
 
     function startCsFlow() {
@@ -4347,7 +5191,7 @@
     }
 
     function showCsScenarioOneSuccess() {
-      addPoint();
+      addPointForScenario("cs-c1");
       showScreen("csScenarioOneSuccess");
     }
 
@@ -4360,7 +5204,7 @@
     }
 
     function showCsScenarioTwoSuccess() {
-      addPoint();
+      addPointForScenario("cs-c2");
       showScreen("csScenarioTwoSuccess");
     }
 
@@ -4385,7 +5229,7 @@
     }
 
     function showCopyScenarioOneSuccess() {
-      addPoint();
+      addPointForScenario("copy-c1");
       showScreen("copyScenarioOneSuccess");
     }
 
@@ -4398,7 +5242,7 @@
     }
 
     function showCopyScenarioTwoSuccess() {
-      addPoint();
+      addPointForScenario("copy-c2");
       showScreen("copyScenarioTwoSuccess");
     }
 
@@ -4425,7 +5269,7 @@
     }
 
     function showDesignScenarioOneSuccess() {
-      addPoint();
+      addPointForScenario("design-c1");
       showScreen("designScenarioOneSuccess");
     }
 
@@ -4438,7 +5282,7 @@
     }
 
     function showDesignScenarioTwoSuccess() {
-      addPoint();
+      addPointForScenario("design-c2");
       showScreen("designScenarioTwoSuccess");
     }
 
@@ -4463,7 +5307,7 @@
     }
 
     function showAudiovisualScenarioOneSuccess() {
-      addPoint();
+      addPointForScenario("audiovisual-c1");
       showScreen("audiovisualScenarioOneSuccess");
     }
 
@@ -4476,7 +5320,7 @@
     }
 
     function showAudiovisualScenarioTwoSuccess() {
-      addPoint();
+      addPointForScenario("audiovisual-c2");
       showScreen("audiovisualScenarioTwoSuccess");
     }
 
@@ -4492,9 +5336,78 @@
       showScreen("audiovisualScenarioTwo");
     }
 
+    function resetChoiceButtons(container = document) {
+      container.querySelectorAll(".choice-button[data-scenario-id]").forEach((button) => {
+        button.disabled = false;
+        button.classList.remove("is-revealed", "is-good", "is-bad");
+      });
+    }
+
+    function revealScenarioChoices(selectedButton) {
+      const choiceStack = selectedButton.closest(".choice-stack");
+
+      if (!choiceStack) {
+        return;
+      }
+
+      const buttons = choiceStack.querySelectorAll(".choice-button[data-scenario-id]");
+
+      buttons.forEach((button) => {
+        button.disabled = true;
+        button.classList.add("is-revealed");
+
+        if (button.dataset.choiceCorrect === "true") {
+          button.classList.add("is-good");
+        } else {
+          button.classList.add("is-bad");
+        }
+      });
+    }
+
+    function handleScenarioChoiceClick(event) {
+      const selectedButton = event.currentTarget;
+      const scenarioId = selectedButton.dataset.scenarioId;
+      const isCorrect = selectedButton.dataset.choiceCorrect === "true";
+      const actions = scenarioChoiceActions[scenarioId];
+
+      if (!scenarioId || !actions || selectedButton.disabled) {
+        return;
+      }
+
+      registerAttempt(scenarioId);
+      revealScenarioChoices(selectedButton);
+
+      window.setTimeout(() => {
+        if (isCorrect) {
+          actions.success();
+        } else {
+          actions.failure();
+        }
+      }, 1200);
+    }
+
     /* =========================================================
       15. EVENTOS PRINCIPAIS
     ========================================================== */
+
+    const scenarioChoiceActions = {
+      "trafego-c1": { success: showTrafficScenarioOneSuccess, failure: showTrafficScenarioOneFailure },
+      "trafego-c2": { success: showTrafficScenarioTwoSuccess, failure: showTrafficScenarioTwoFailure },
+      "rh-c1": { success: showHrScenarioOneSuccess, failure: showHrScenarioOneFailure },
+      "rh-c2": { success: showHrScenarioTwoSuccess, failure: showHrScenarioTwoFailure },
+      "comercial-c1": { success: showCommercialScenarioOneSuccess, failure: showCommercialScenarioOneFailure },
+      "comercial-c2": { success: showCommercialScenarioTwoSuccess, failure: showCommercialScenarioTwoFailure },
+      "sdr-c1": { success: showSdrScenarioOneSuccess, failure: showSdrScenarioOneFailure },
+      "sdr-c2": { success: showSdrScenarioTwoSuccess, failure: showSdrScenarioTwoFailure },
+      "cs-c1": { success: showCsScenarioOneSuccess, failure: showCsScenarioOneFailure },
+      "cs-c2": { success: showCsScenarioTwoSuccess, failure: showCsScenarioTwoFailure },
+      "copy-c1": { success: showCopyScenarioOneSuccess, failure: showCopyScenarioOneFailure },
+      "copy-c2": { success: showCopyScenarioTwoSuccess, failure: showCopyScenarioTwoFailure },
+      "design-c1": { success: showDesignScenarioOneSuccess, failure: showDesignScenarioOneFailure },
+      "design-c2": { success: showDesignScenarioTwoSuccess, failure: showDesignScenarioTwoFailure },
+      "audiovisual-c1": { success: showAudiovisualScenarioOneSuccess, failure: showAudiovisualScenarioOneFailure },
+      "audiovisual-c2": { success: showAudiovisualScenarioTwoSuccess, failure: showAudiovisualScenarioTwoFailure }
+    };
 
     startButton.addEventListener("click", () => {
       showScreen("register");
@@ -4510,6 +5423,10 @@
       input.addEventListener("input", clearRegisterErrors);
     });
 
+    certificateButton.addEventListener("click", () => {
+      generateCertificate();
+    });
+
     rankingButton.addEventListener("click", () => {
       showRankingScreen();
     });
@@ -4518,12 +5435,8 @@
       showScreen("final");
     });
 
-    trafficScenarioOneGoodChoice.addEventListener("click", () => {
-      showTrafficScenarioOneSuccess();
-    });
-
-    trafficScenarioOneBadChoice.addEventListener("click", () => {
-      showTrafficScenarioOneFailure();
+    document.querySelectorAll(".choice-button[data-scenario-id][data-choice-correct]").forEach((button) => {
+      button.addEventListener("click", handleScenarioChoiceClick);
     });
 
     goToTrafficScenarioTwoButton.addEventListener("click", () => {
@@ -4534,28 +5447,12 @@
       retryTrafficScenarioOne();
     });
 
-    trafficScenarioTwoGoodChoice.addEventListener("click", () => {
-      showTrafficScenarioTwoSuccess();
-    });
-
-    trafficScenarioTwoBadChoice.addEventListener("click", () => {
-      showTrafficScenarioTwoFailure();
-    });
-
     backToSectorsFromTrafficButton.addEventListener("click", () => {
       completeSector("trafego-pago");
     });
 
     retryTrafficScenarioTwoButton.addEventListener("click", () => {
       retryTrafficScenarioTwo();
-    });
-
-    hrScenarioOneGoodChoice.addEventListener("click", () => {
-      showHrScenarioOneSuccess();
-    });
-
-    hrScenarioOneBadChoice.addEventListener("click", () => {
-      showHrScenarioOneFailure();
     });
 
     goToHrScenarioTwoButton.addEventListener("click", () => {
@@ -4566,28 +5463,12 @@
       retryHrScenarioOne();
     });
 
-    hrScenarioTwoGoodChoice.addEventListener("click", () => {
-      showHrScenarioTwoSuccess();
-    });
-
-    hrScenarioTwoBadChoice.addEventListener("click", () => {
-      showHrScenarioTwoFailure();
-    });
-
     backToSectorsFromHrButton.addEventListener("click", () => {
       completeSector("rh");
     });
 
     retryHrScenarioTwoButton.addEventListener("click", () => {
       retryHrScenarioTwo();
-    });
-
-    commercialScenarioOneGoodChoice.addEventListener("click", () => {
-      showCommercialScenarioOneSuccess();
-    });
-
-    commercialScenarioOneBadChoice.addEventListener("click", () => {
-      showCommercialScenarioOneFailure();
     });
 
     goToCommercialScenarioTwoButton.addEventListener("click", () => {
@@ -4598,28 +5479,12 @@
       retryCommercialScenarioOne();
     });
 
-    commercialScenarioTwoGoodChoice.addEventListener("click", () => {
-      showCommercialScenarioTwoSuccess();
-    });
-
-    commercialScenarioTwoBadChoice.addEventListener("click", () => {
-      showCommercialScenarioTwoFailure();
-    });
-
     backToSectorsFromCommercialButton.addEventListener("click", () => {
       completeSector("comercial");
     });
 
     retryCommercialScenarioTwoButton.addEventListener("click", () => {
       retryCommercialScenarioTwo();
-    });
-
-    sdrScenarioOneGoodChoice.addEventListener("click", () => {
-      showSdrScenarioOneSuccess();
-    });
-
-    sdrScenarioOneBadChoice.addEventListener("click", () => {
-      showSdrScenarioOneFailure();
     });
 
     goToSdrScenarioTwoButton.addEventListener("click", () => {
@@ -4630,28 +5495,12 @@
       retrySdrScenarioOne();
     });
 
-    sdrScenarioTwoGoodChoice.addEventListener("click", () => {
-      showSdrScenarioTwoSuccess();
-    });
-
-    sdrScenarioTwoBadChoice.addEventListener("click", () => {
-      showSdrScenarioTwoFailure();
-    });
-
     backToSectorsFromSdrButton.addEventListener("click", () => {
       completeSector("sdr");
     });
 
     retrySdrScenarioTwoButton.addEventListener("click", () => {
       retrySdrScenarioTwo();
-    });
-
-    csScenarioOneGoodChoice.addEventListener("click", () => {
-      showCsScenarioOneSuccess();
-    });
-
-    csScenarioOneBadChoice.addEventListener("click", () => {
-      showCsScenarioOneFailure();
     });
 
     goToCsScenarioTwoButton.addEventListener("click", () => {
@@ -4662,28 +5511,12 @@
       retryCsScenarioOne();
     });
 
-    csScenarioTwoGoodChoice.addEventListener("click", () => {
-      showCsScenarioTwoSuccess();
-    });
-
-    csScenarioTwoBadChoice.addEventListener("click", () => {
-      showCsScenarioTwoFailure();
-    });
-
     backToSectorsFromCsButton.addEventListener("click", () => {
       completeSector("cs");
     });
 
     retryCsScenarioTwoButton.addEventListener("click", () => {
       retryCsScenarioTwo();
-    });
-
-    copyScenarioOneGoodChoice.addEventListener("click", () => {
-      showCopyScenarioOneSuccess();
-    });
-
-    copyScenarioOneBadChoice.addEventListener("click", () => {
-      showCopyScenarioOneFailure();
     });
 
     goToCopyScenarioTwoButton.addEventListener("click", () => {
@@ -4694,28 +5527,12 @@
       retryCopyScenarioOne();
     });
 
-    copyScenarioTwoGoodChoice.addEventListener("click", () => {
-      showCopyScenarioTwoSuccess();
-    });
-
-    copyScenarioTwoBadChoice.addEventListener("click", () => {
-      showCopyScenarioTwoFailure();
-    });
-
     backToSectorsFromCopyButton.addEventListener("click", () => {
       completeSector("copy");
     });
 
     retryCopyScenarioTwoButton.addEventListener("click", () => {
       retryCopyScenarioTwo();
-    });
-
-    designScenarioOneGoodChoice.addEventListener("click", () => {
-      showDesignScenarioOneSuccess();
-    });
-
-    designScenarioOneBadChoice.addEventListener("click", () => {
-      showDesignScenarioOneFailure();
     });
 
     goToDesignScenarioTwoButton.addEventListener("click", () => {
@@ -4726,14 +5543,6 @@
       retryDesignScenarioOne();
     });
 
-    designScenarioTwoGoodChoice.addEventListener("click", () => {
-      showDesignScenarioTwoSuccess();
-    });
-
-    designScenarioTwoBadChoice.addEventListener("click", () => {
-      showDesignScenarioTwoFailure();
-    });
-
     backToSectorsFromDesignButton.addEventListener("click", () => {
       completeSector("design");
     });
@@ -4742,28 +5551,12 @@
       retryDesignScenarioTwo();
     });
 
-    audiovisualScenarioOneGoodChoice.addEventListener("click", () => {
-      showAudiovisualScenarioOneSuccess();
-    });
-
-    audiovisualScenarioOneBadChoice.addEventListener("click", () => {
-      showAudiovisualScenarioOneFailure();
-    });
-
     goToAudiovisualScenarioTwoButton.addEventListener("click", () => {
       showAudiovisualScenarioTwo();
     });
 
     retryAudiovisualScenarioOneButton.addEventListener("click", () => {
       retryAudiovisualScenarioOne();
-    });
-
-    audiovisualScenarioTwoGoodChoice.addEventListener("click", () => {
-      showAudiovisualScenarioTwoSuccess();
-    });
-
-    audiovisualScenarioTwoBadChoice.addEventListener("click", () => {
-      showAudiovisualScenarioTwoFailure();
     });
 
     backToSectorsFromAudiovisualButton.addEventListener("click", () => {
@@ -4778,13 +5571,17 @@
       resetGame();
     });
 
+    playAgainFromEasterButton.addEventListener("click", () => {
+      resetGame();
+    });
+
 
     /* =========================================================
       16. INICIALIZAÇÃO DO JOGO
     ========================================================== */
 
     function initGame() {
-      updateScore();
+      updateScoreDisplay();
       updateProgress();
       renderSectorCards();
       showScreen("welcome");
@@ -4794,19 +5591,20 @@
 
     /*
       Observação para edição futura:
-      - A função addPoint() já está criada e pode ser chamada quando o aluno fizer uma escolha correta.
+      - A função addPointForScenario() calcula pontos conforme o número de tentativas por cenário.
       - A variável selectedSector guarda o setor escolhido.
       - A próxima etapa pode substituir o placeholder por cenários, escolhas e feedbacks por setor.
       - O setor Tráfego Pago já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
       - O setor RH já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
       - O setor Comercial já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
       - O setor SDR já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
-      - O setor CS já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
+      - O setor Atendimento já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
       - O setor Copy já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
       - O setor Design já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
       - O setor Audiovisual já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
       - O jogo possui controle de setores concluídos, tela final, confete, feedback háptico e progresso no topo.
       - O jogo possui cadastro antes da missão, salvamento silencioso no Supabase e ranking ao vivo.
+      - O jogo possui easter egg para pontuação zero e certificado de conclusão gerado via Canvas.
     */
   </script>
 </body>
