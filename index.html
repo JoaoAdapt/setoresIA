@@ -4167,6 +4167,123 @@
     const supabaseUrl = "https://wmolvndzpputfqmkvzhl.supabase.co";
     const supabaseKey = "sb_publishable_LMqy3KTDEiIyHa5vPvdIhA_JcwiYORC";
 
+    function saveSession() {
+      try {
+        const session = {
+          playerName,
+          playerAge,
+          playerEmail,
+          score,
+          resultSaved,
+          completedSectors: [...completedSectors],
+          scenarioAttempts: { ...scenarioAttempts },
+          currentScreen: getCurrentScreenId()
+        };
+        localStorage.setItem('missaoAdaptSession', JSON.stringify(session));
+      } catch (e) {
+        console.warn('Erro ao salvar sessão:', e);
+      }
+    }
+
+    function getCurrentScreenId() {
+      for (const [key, el] of Object.entries(screens)) {
+        if (el && el.classList.contains('is-active')) return key;
+      }
+      return 'welcome';
+    }
+
+    function clearSession() {
+      try {
+        localStorage.removeItem('missaoAdaptSession');
+      } catch (e) {}
+    }
+
+    function restoreSession() {
+      try {
+        const raw = localStorage.getItem('missaoAdaptSession');
+        if (!raw) return false;
+        const s = JSON.parse(raw);
+        if (!s.playerName) return false;
+        playerName = s.playerName || '';
+        playerAge = s.playerAge || '';
+        playerEmail = s.playerEmail || '';
+        score = s.score || 0;
+        resultSaved = s.resultSaved || false;
+        completedSectors.clear();
+        if (Array.isArray(s.completedSectors)) {
+          s.completedSectors.forEach(id => completedSectors.add(id));
+        }
+        if (s.scenarioAttempts && typeof s.scenarioAttempts === 'object') {
+          Object.assign(scenarioAttempts, s.scenarioAttempts);
+        }
+        updateScoreDisplay();
+        updateProgress();
+        renderSectorCards();
+        const target = s.currentScreen || 'welcome';
+        const scenarioResultScreens = [
+          'trafficScenarioOneSuccess', 'trafficScenarioOneFailure',
+          'trafficScenarioTwoSuccess', 'trafficScenarioTwoFailure',
+          'hrScenarioOneSuccess', 'hrScenarioOneFailure',
+          'hrScenarioTwoSuccess', 'hrScenarioTwoFailure',
+          'commercialScenarioOneSuccess', 'commercialScenarioOneFailure',
+          'commercialScenarioTwoSuccess', 'commercialScenarioTwoFailure',
+          'sdrScenarioOneSuccess', 'sdrScenarioOneFailure',
+          'sdrScenarioTwoSuccess', 'sdrScenarioTwoFailure',
+          'csScenarioOneSuccess', 'csScenarioOneFailure',
+          'csScenarioTwoSuccess', 'csScenarioTwoFailure',
+          'copyScenarioOneSuccess', 'copyScenarioOneFailure',
+          'copyScenarioTwoSuccess', 'copyScenarioTwoFailure',
+          'designScenarioOneSuccess', 'designScenarioOneFailure',
+          'designScenarioTwoSuccess', 'designScenarioTwoFailure',
+          'audiovisualScenarioOneSuccess', 'audiovisualScenarioOneFailure',
+          'audiovisualScenarioTwoSuccess', 'audiovisualScenarioTwoFailure'
+        ];
+        const scenarioMap = {
+          'trafficScenarioOneSuccess': 'trafficScenarioOne',
+          'trafficScenarioOneFailure': 'trafficScenarioOne',
+          'trafficScenarioTwoSuccess': 'trafficScenarioTwo',
+          'trafficScenarioTwoFailure': 'trafficScenarioTwo',
+          'hrScenarioOneSuccess': 'hrScenarioOne',
+          'hrScenarioOneFailure': 'hrScenarioOne',
+          'hrScenarioTwoSuccess': 'hrScenarioTwo',
+          'hrScenarioTwoFailure': 'hrScenarioTwo',
+          'commercialScenarioOneSuccess': 'commercialScenarioOne',
+          'commercialScenarioOneFailure': 'commercialScenarioOne',
+          'commercialScenarioTwoSuccess': 'commercialScenarioTwo',
+          'commercialScenarioTwoFailure': 'commercialScenarioTwo',
+          'sdrScenarioOneSuccess': 'sdrScenarioOne',
+          'sdrScenarioOneFailure': 'sdrScenarioOne',
+          'sdrScenarioTwoSuccess': 'sdrScenarioTwo',
+          'sdrScenarioTwoFailure': 'sdrScenarioTwo',
+          'csScenarioOneSuccess': 'csScenarioOne',
+          'csScenarioOneFailure': 'csScenarioOne',
+          'csScenarioTwoSuccess': 'csScenarioTwo',
+          'csScenarioTwoFailure': 'csScenarioTwo',
+          'copyScenarioOneSuccess': 'copyScenarioOne',
+          'copyScenarioOneFailure': 'copyScenarioOne',
+          'copyScenarioTwoSuccess': 'copyScenarioTwo',
+          'copyScenarioTwoFailure': 'copyScenarioTwo',
+          'designScenarioOneSuccess': 'designScenarioOne',
+          'designScenarioOneFailure': 'designScenarioOne',
+          'designScenarioTwoSuccess': 'designScenarioTwo',
+          'designScenarioTwoFailure': 'designScenarioTwo',
+          'audiovisualScenarioOneSuccess': 'audiovisualScenarioOne',
+          'audiovisualScenarioOneFailure': 'audiovisualScenarioOne',
+          'audiovisualScenarioTwoSuccess': 'audiovisualScenarioTwo',
+          'audiovisualScenarioTwoFailure': 'audiovisualScenarioTwo'
+        };
+        const resolvedTarget = scenarioResultScreens.includes(target)
+          ? scenarioMap[target]
+          : target;
+        showScreen(resolvedTarget);
+        return true;
+      } catch (e) {
+        console.warn('Erro ao restaurar sessão:', e);
+        localStorage.removeItem('missaoAdaptSession');
+        return false;
+      }
+    }
+
     /* =========================================================
       2. SELETORES DO DOM
     ========================================================== */
@@ -4469,6 +4586,9 @@
 
         requestAnimationFrame(() => {
           nextScreen.classList.add("is-active");
+          if (!["final", "easterEgg", "ranking"].includes(screenName)) {
+            saveSession();
+          }
         });
 
         return;
@@ -4482,6 +4602,9 @@
 
         requestAnimationFrame(() => {
           nextScreen.classList.add("is-active");
+          if (!["final", "easterEgg", "ranking"].includes(screenName)) {
+            saveSession();
+          }
         });
       }, 180);
     }
@@ -4554,6 +4677,7 @@
     }
 
     function showFinalScreen() {
+      clearSession();
       updateFinalScreen();
 
       if (!resultSaved) {
@@ -4583,6 +4707,7 @@
     }
 
     function resetGame() {
+      clearSession();
       score = 0;
       selectedSector = null;
       playerName = "";
@@ -5568,7 +5693,10 @@
       updateScoreDisplay();
       updateProgress();
       renderSectorCards();
-      showScreen("welcome");
+      const restored = restoreSession();
+      if (!restored) {
+        showScreen("welcome");
+      }
     }
 
     initGame();
