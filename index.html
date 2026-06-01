@@ -491,6 +491,21 @@
       font-size: 0.96rem;
     }
 
+    .sector-progress-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(250, 204, 21, 0.16);
+      border: 1px solid rgba(250, 204, 21, 0.4);
+      font-size: 0.96rem;
+    }
+
     .sector-notice {
       display: none;
       margin: -4px 0 16px;
@@ -571,6 +586,67 @@
     .back-to-sectors-btn:hover {
       border-color: rgba(255, 255, 255, 0.26);
       color: var(--text);
+    }
+
+    .exit-warning {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: calc(100% - 36px);
+      max-width: 444px;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(251, 113, 133, 0.4);
+      background: rgba(13, 13, 13, 0.96);
+      box-shadow: 0 0 40px rgba(251, 113, 133, 0.18), 0 20px 50px rgba(0,0,0,0.5);
+      backdrop-filter: blur(18px);
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      animation: noticePop 220ms ease both;
+    }
+
+    .exit-warning.is-visible {
+      display: flex;
+    }
+
+    .exit-warning-text {
+      color: var(--text);
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .exit-warning-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .exit-warning-confirm {
+      min-height: 46px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(145deg, #fb7185, #be123c);
+      color: #fff1f2;
+      font-weight: 800;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .exit-warning-cancel {
+      min-height: 46px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text);
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
     }
 
     /* =========================================================
@@ -1333,6 +1409,8 @@
               Bem-vindo à Adapt
             </div>
 
+            <p id="homeGreeting" style="display:none; font-size: 1.1rem; font-weight: 800; color: var(--neon); margin-bottom: 8px; letter-spacing: -0.02em;"></p>
+
             <h1 id="welcomeTitle">Missão Adapt</h1>
 
             <p class="subtitle">
@@ -1351,8 +1429,8 @@
             </div>
 
             <button id="startButton" class="primary-button" type="button" aria-label="Iniciar missão" style="margin-top: 16px;">
-              <span>Iniciar sua Missão</span>
-              <span aria-hidden="true">🚀</span>
+              <span>Começar os Desafios</span>
+              <span aria-hidden="true">→</span>
             </button>
           </div>
         </div>
@@ -1435,65 +1513,6 @@
       </section>
 
       <!-- =========================================================
-        TELA HOME — BOAS-VINDAS APÓS CADASTRO
-      ========================================================== -->
-
-      <section
-        id="screen-home"
-        class="screen"
-        aria-labelledby="homeTitle"
-      >
-        <div class="screen-card">
-          <div class="screen-content">
-            <div class="section-header">
-              <div class="eyebrow">
-                <span aria-hidden="true">🎮</span>
-                Bem-vindo à Adapt
-              </div>
-
-              <h2 id="homeTitle">Sua missão começa aqui.</h2>
-
-              <p class="subtitle">
-                Explore os setores da agência, tome decisões reais e descubra como a IA transforma o trabalho de cada área.
-              </p>
-            </div>
-
-            <div class="home-link-grid" aria-label="Links úteis da Adapt">
-              <a
-                class="sector-card home-link-card"
-                href="https://adaptmkt.com.br/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir site da Adapt em nova aba"
-              >
-                <span class="sector-emoji" aria-hidden="true">🌐</span>
-                <span class="sector-name">Site da Adapt</span>
-              </a>
-
-              <a
-                class="sector-card home-link-card"
-                href="https://www.instagram.com/adaptestrategiasdigitais/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir Instagram da Adapt em nova aba"
-              >
-                <span class="sector-emoji" aria-hidden="true">📸</span>
-                <span class="sector-name">Instagram</span>
-              </a>
-            </div>
-
-            <button
-              id="homeStartButton"
-              class="primary-button home-start-button"
-              type="button"
-            >
-              Bem-vindo à Adapt — sua missão começa aqui
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- =========================================================
         TELA 2 — SELEÇÃO DE SETOR
       ========================================================== -->
 
@@ -1531,51 +1550,6 @@
               class="sector-grid"
               aria-label="Lista de setores disponíveis"
             ></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- =========================================================
-        TELA 3 — PLACEHOLDER DE CENÁRIO
-      ========================================================== -->
-
-      <section
-        id="scenarioScreen"
-        class="screen"
-        aria-labelledby="scenarioTitle"
-      >
-        <div class="screen-card scenario-placeholder">
-          <div class="screen-content">
-            <div class="construction-badge">
-              <span aria-hidden="true">🛠️</span>
-              Próxima etapa
-            </div>
-
-            <div
-              id="scenarioEmoji"
-              class="scenario-emoji"
-              aria-hidden="true"
-            >
-              🎯
-            </div>
-
-            <h2 id="scenarioTitle" class="scenario-title">
-              Tráfego Pago
-            </h2>
-
-            <p class="scenario-text">
-              Cenário em construção — em breve!
-            </p>
-
-            <button
-              id="backButton"
-              class="secondary-button"
-              type="button"
-              aria-label="Voltar para seleção de setor"
-            >
-              <span aria-hidden="true">←</span>
-              <span>Voltar</span>
-            </button>
           </div>
         </div>
       </section>
@@ -2544,7 +2518,7 @@
         <div class="screen-card traffic-screen-card">
           <div class="screen-content">
             <div class="traffic-avatar" aria-hidden="true">
-              👩‍💻
+              👨‍💻
             </div>
 
             <div class="challenge-meta">
@@ -2703,7 +2677,7 @@
         <div class="screen-card traffic-screen-card">
           <div class="screen-content">
             <div class="traffic-avatar" aria-hidden="true">
-              👩‍💻
+              👨‍💻
             </div>
 
             <div class="challenge-meta">
@@ -4283,6 +4257,14 @@
         </div>
       </section>
     </main>
+
+    <div id="exitWarning" class="exit-warning" role="dialog" aria-modal="true" aria-label="Confirmação de saída">
+      <p class="exit-warning-text">⚠️ Se sair agora, o progresso deste desafio será perdido. Tem certeza?</p>
+      <div class="exit-warning-actions">
+        <button id="exitWarningConfirm" class="exit-warning-confirm" type="button">Sair mesmo assim</button>
+        <button id="exitWarningCancel" class="exit-warning-cancel" type="button">Continuar jogando</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -4291,7 +4273,6 @@
     ========================================================== */
 
     let score = 0;
-    let selectedSector = null;
 
     const sectors = [
       {
@@ -4337,6 +4318,7 @@
     ];
 
     const completedSectors = new Set();
+    let sectorInProgress = null;
     const totalScenarios = sectors.length * 2;
     const maxScore = totalScenarios * 2;
     const scenarioAttempts = {};
@@ -4357,6 +4339,7 @@
           playerEmail,
           score,
           resultSaved,
+          sectorInProgress,
           completedSectors: [...completedSectors],
           scenarioAttempts: { ...scenarioAttempts },
           currentScreen: getCurrentScreenId()
@@ -4391,6 +4374,7 @@
         playerEmail = s.playerEmail || '';
         score = s.score || 0;
         resultSaved = s.resultSaved || false;
+        sectorInProgress = s.sectorInProgress || null;
         completedSectors.clear();
         if (Array.isArray(s.completedSectors)) {
           s.completedSectors.forEach(id => completedSectors.add(id));
@@ -4457,7 +4441,7 @@
         };
         const resolvedTarget = scenarioResultScreens.includes(target)
           ? scenarioMap[target]
-          : target;
+          : (screens[target] ? target : 'welcome');
         showScreen(resolvedTarget);
         return true;
       } catch (e) {
@@ -4477,6 +4461,17 @@
       } else {
         display.style.display = 'none';
       }
+
+      const greeting = document.getElementById('homeGreeting');
+      if (greeting) {
+        const firstName = playerName ? playerName.trim().split(' ')[0] : '';
+        if (firstName) {
+          greeting.textContent = `Olá, ${firstName}! 👋`;
+          greeting.style.display = 'block';
+        } else {
+          greeting.style.display = 'none';
+        }
+      }
     }
 
     /* =========================================================
@@ -4486,9 +4481,7 @@
     const screens = {
       welcome: document.getElementById("welcomeScreen"),
       register: document.getElementById("screen-register"),
-      home: document.getElementById("screen-home"),
       sectors: document.getElementById("sectorScreen"),
-      scenario: document.getElementById("scenarioScreen"),
       trafficScenarioOne: document.getElementById("trafficScenarioOneScreen"),
       trafficScenarioOneSuccess: document.getElementById("trafficScenarioOneSuccessScreen"),
       trafficScenarioOneFailure: document.getElementById("trafficScenarioOneFailureScreen"),
@@ -4543,8 +4536,6 @@
     };
 
     const startButton = document.getElementById("startButton");
-    const backButton = document.getElementById("backButton");
-    const homeStartButton = document.getElementById("homeStartButton");
     const sectorGrid = document.getElementById("sectorGrid");
 
     const scorePill = document.getElementById("scorePill");
@@ -4571,8 +4562,6 @@
     const playerAgeError = document.getElementById("playerAgeError");
     const playerEmailError = document.getElementById("playerEmailError");
 
-    const scenarioEmoji = document.getElementById("scenarioEmoji");
-    const scenarioTitle = document.getElementById("scenarioTitle");
 
     const trafficScenarioOneGoodChoice = document.getElementById("trafficScenarioOneGoodChoice");
     const trafficScenarioOneBadChoice = document.getElementById("trafficScenarioOneBadChoice");
@@ -4816,6 +4805,7 @@
 
     function createSectorCard(sector) {
       const button = document.createElement("button");
+      const isInProgress = sectorInProgress === sector.id && !completedSectors.has(sector.id);
 
       button.className = "sector-card";
       button.type = "button";
@@ -4828,6 +4818,7 @@
 
       button.innerHTML = `
         ${completedSectors.has(sector.id) ? '<span class="sector-completed-badge" aria-hidden="true">✅</span>' : ""}
+        ${isInProgress ? '<span class="sector-progress-badge" aria-label="Em progresso">⏳</span>' : ''}
         <span class="sector-emoji" aria-hidden="true">${sector.emoji}</span>
         <span class="sector-name">${sector.name}</span>
       `;
@@ -4896,6 +4887,7 @@
 
     function completeSector(sectorId) {
       completedSectors.add(sectorId);
+      sectorInProgress = null;
       updateProgress();
       renderSectorCards();
 
@@ -4911,7 +4903,7 @@
       clearSession();
       updatePlayerNameDisplay();
       score = 0;
-      selectedSector = null;
+      sectorInProgress = null;
       playerName = "";
       playerAge = "";
       playerEmail = "";
@@ -5245,7 +5237,7 @@
 
       drawCenteredText(
         context,
-        "Missão Adapt · Adapt Estratégias Digitais · 2025",
+        "Missão Adapt · Adapt Estratégias Digitais · 2026",
         centerX,
         460,
         "400 13px Inter, Arial, sans-serif",
@@ -5286,57 +5278,58 @@
         return;
       }
 
-      selectedSector = sector;
-
-      if (completedSectors.has(selectedSector.id)) {
+      if (completedSectors.has(sector.id)) {
         showSectorNotice();
         return;
       }
 
-      if (selectedSector.id === "trafego-pago") {
+      if (sector.id === "trafego-pago") {
+        sectorInProgress = sectorId;
         startTrafficPaidFlow();
         return;
       }
 
-      if (selectedSector.id === "rh") {
+      if (sector.id === "rh") {
+        sectorInProgress = sectorId;
         startHrFlow();
         return;
       }
 
-      if (selectedSector.id === "comercial") {
+      if (sector.id === "comercial") {
+        sectorInProgress = sectorId;
         startCommercialFlow();
         return;
       }
 
-      if (selectedSector.id === "sdr") {
+      if (sector.id === "sdr") {
+        sectorInProgress = sectorId;
         startSdrFlow();
         return;
       }
 
-      if (selectedSector.id === "cs") {
+      if (sector.id === "cs") {
+        sectorInProgress = sectorId;
         startCsFlow();
         return;
       }
 
-      if (selectedSector.id === "copy") {
+      if (sector.id === "copy") {
+        sectorInProgress = sectorId;
         startCopyFlow();
         return;
       }
 
-      if (selectedSector.id === "design") {
+      if (sector.id === "design") {
+        sectorInProgress = sectorId;
         startDesignFlow();
         return;
       }
 
-      if (selectedSector.id === "audiovisual") {
+      if (sector.id === "audiovisual") {
+        sectorInProgress = sectorId;
         startAudiovisualFlow();
         return;
       }
-
-      scenarioEmoji.textContent = selectedSector.emoji;
-      scenarioTitle.textContent = selectedSector.name;
-
-      showScreen("scenario");
     }
 
     function goBackToSectors() {
@@ -5726,9 +5719,6 @@
       showScreen("sectors");
     });
 
-    homeStartButton.addEventListener("click", () => {
-      showScreen("sectors");
-    });
 
     document.getElementById('brandHomeButton').addEventListener('click', () => {
       const outOfGame = ['register', 'welcome'].some(name =>
@@ -5739,9 +5729,6 @@
       }
     });
 
-    backButton.addEventListener("click", () => {
-      goBackToSectors();
-    });
 
     registerForm.addEventListener("submit", handleRegisterSubmit);
 
@@ -5767,8 +5754,18 @@
 
     document.querySelectorAll('.back-to-sectors-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        showScreen('sectors');
+        document.getElementById('exitWarning').classList.add('is-visible');
       });
+    });
+
+    document.getElementById('exitWarningConfirm').addEventListener('click', () => {
+      document.getElementById('exitWarning').classList.remove('is-visible');
+      renderSectorCards();
+      showScreen('sectors');
+    });
+
+    document.getElementById('exitWarningCancel').addEventListener('click', () => {
+      document.getElementById('exitWarning').classList.remove('is-visible');
     });
 
     goToTrafficScenarioTwoButton.addEventListener("click", () => {
@@ -5925,21 +5922,8 @@
     initGame();
 
     /*
-      Observação para edição futura:
-      - A função addPointForScenario() calcula pontos conforme o número de tentativas por cenário.
-      - A variável selectedSector guarda o setor escolhido.
-      - A próxima etapa pode substituir o placeholder por cenários, escolhas e feedbacks por setor.
-      - O setor Tráfego Pago já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
-      - O setor RH já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
-      - O setor Comercial já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
-      - O setor SDR já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
-      - O setor Atendimento já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
-      - O setor Copy já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
-      - O setor Design já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
-      - O setor Audiovisual já possui fluxo completo com 2 desafios, telas de sucesso e telas de fracasso.
-      - O jogo possui controle de setores concluídos, tela final, confete, feedback háptico e progresso no topo.
-      - O jogo possui cadastro antes da missão, salvamento silencioso no Supabase e ranking ao vivo.
-      - O jogo possui easter egg para pontuação zero e certificado de conclusão gerado via Canvas.
+      Missão Adapt — jogo completo.
+      8 setores · 16 cenários · pontuação por tentativas · ranking Supabase · certificado Canvas · persistência localStorage
     */
   </script>
 </body>
