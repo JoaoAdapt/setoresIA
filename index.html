@@ -4,7 +4,7 @@
   <!-- =========================================================
     MISSÃO ADAPT — ESTRUTURA BASE
     Arquivo único com HTML, CSS e JavaScript inline
-    Projeto: Mini jogo educacional interativo - Jão
+    Projeto: Mini jogo educacional interativo
   ========================================================== -->
 
   <meta charset="UTF-8" />
@@ -1521,7 +1521,7 @@
                 data-scenario-id="trafego-c1"
                 data-choice-correct="true"
               >
-                A — Usa IA com um prompt estruturado para cruzar os dados e identificar padrões de performance
+                A — Cruza os dados do período com uma análise estruturada antes de montar o resumo pro cliente
               </button>
 
               <button
@@ -1553,7 +1553,6 @@
               >
                 D — Abre as planilhas e começa a criar gráficos manualmente no Excel
               </button>
-            
             </div>
           </div>
         </div>
@@ -1680,23 +1679,23 @@
               </button>
 
               <button
-                id="trafficScenarioTwoChoiceB"
-                class="choice-button"
-                type="button"
-                data-scenario-id="trafego-c2"
-                data-choice-correct="false"
-              >
-                B — Abre o gerenciador de anúncios e começa a olhar manualmente cada conjunto
-              </button>
-
-              <button
                 id="trafficScenarioTwoGoodChoice"
                 class="choice-button"
                 type="button"
                 data-scenario-id="trafego-c2"
                 data-choice-correct="true"
               >
-                C — Usa IA para cruzar dados do período, identificar variações e estruturar a resposta pro cliente
+                B — Levanta os dados do período, identifica as variações e estrutura uma resposta clara antes de falar com o cliente
+              </button>
+
+              <button
+                id="trafficScenarioTwoChoiceB"
+                class="choice-button"
+                type="button"
+                data-scenario-id="trafego-c2"
+                data-choice-correct="false"
+              >
+                C — Abre o gerenciador de anúncios e começa a olhar manualmente cada conjunto
               </button>
 
               <button
@@ -1708,7 +1707,6 @@
               >
                 D — Culpa sazonalidade sem verificar os dados
               </button>
-            
             </div>
           </div>
         </div>
@@ -1844,25 +1842,24 @@
               </button>
 
               <button
-                id="hrScenarioOneGoodChoice"
-                class="choice-button"
-                type="button"
-                data-scenario-id="rh-c1"
-                data-choice-correct="true"
-              >
-                C — Usa IA com o briefing de cada vaga para gerar, refinar e revisar as descrições
-              </button>
-
-              <button
                 id="hrScenarioOneChoiceD"
                 class="choice-button"
                 type="button"
                 data-scenario-id="rh-c1"
                 data-choice-correct="false"
               >
-                D — Pede pro time de copy escrever, mesmo não sendo responsabilidade deles
+                C — Pede pro time de copy escrever, mesmo não sendo responsabilidade deles
               </button>
-            
+
+              <button
+                id="hrScenarioOneGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="rh-c1"
+                data-choice-correct="true"
+              >
+                D — Usa o briefing de cada vaga para gerar, refinar e revisar as descrições com apoio de ferramenta
+              </button>
             </div>
           </div>
         </div>
@@ -1979,13 +1976,23 @@
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de RH">
               
               <button
+                id="hrScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="rh-c2"
+                data-choice-correct="true"
+              >
+                A — Define critérios objetivos de triagem e filtra os perfis mais aderentes antes de ler qualquer currículo
+              </button>
+
+              <button
                 id="hrScenarioTwoBadChoice"
                 class="choice-button"
                 type="button"
                 data-scenario-id="rh-c2"
                 data-choice-correct="false"
               >
-                A — Lê todos os 80 currículos em ordem de chegada
+                B — Lê todos os 80 currículos em ordem de chegada
               </button>
 
               <button
@@ -1995,7 +2002,7 @@
                 data-scenario-id="rh-c2"
                 data-choice-correct="false"
               >
-                B — Filtra só pelos que têm a palavra-chave certa no título do cargo
+                C — Filtra só pelos que têm a palavra-chave certa no título do cargo
               </button>
 
               <button
@@ -2005,19 +2012,8 @@
                 data-scenario-id="rh-c2"
                 data-choice-correct="false"
               >
-                C — Pede para o gestor da área fazer a triagem sozinho
+                D — Pede para o gestor da área fazer a triagem sozinho
               </button>
-
-              <button
-                id="hrScenarioTwoGoodChoice"
-                class="choice-button"
-                type="button"
-                data-scenario-id="rh-c2"
-                data-choice-correct="true"
-              >
-                D — Usa IA para definir critérios objetivos de triagem e filtrar os perfis mais aderentes
-              </button>
-            
             </div>
           </div>
         </div>
@@ -2159,7 +2155,7 @@
                 data-scenario-id="comercial-c1"
                 data-choice-correct="true"
               >
-                C — Usa IA para entender o segmento, dores comuns e o que esse tipo de empresa valoriza em marketing
+                C — Estuda o segmento em profundidade — dores comuns, linguagem do mercado e o que esse tipo de empresa valoriza — antes da reunião
               </button>
 
               <button
@@ -2171,7 +2167,6 @@
               >
                 D — Liga para o cliente pedindo para remarcar a reunião
               </button>
-            
             </div>
           </div>
         </div>
@@ -2298,23 +2293,23 @@
               </button>
 
               <button
-                id="commercialScenarioTwoChoiceB"
-                class="choice-button"
-                type="button"
-                data-scenario-id="comercial-c2"
-                data-choice-correct="false"
-              >
-                B — Escreve a proposta do zero sem nenhum suporte, só com as anotações
-              </button>
-
-              <button
                 id="commercialScenarioTwoChoiceC"
                 class="choice-button"
                 type="button"
                 data-scenario-id="comercial-c2"
                 data-choice-correct="false"
               >
-                C — Pede mais 2 dias para fazer uma proposta mais elaborada
+                B — Pede mais 2 dias para fazer uma proposta mais elaborada
+              </button>
+
+              <button
+                id="commercialScenarioTwoChoiceB"
+                class="choice-button"
+                type="button"
+                data-scenario-id="comercial-c2"
+                data-choice-correct="false"
+              >
+                C — Escreve a proposta do zero sem nenhum suporte, só com as anotações
               </button>
 
               <button
@@ -2324,9 +2319,8 @@
                 data-scenario-id="comercial-c2"
                 data-choice-correct="true"
               >
-                D — Usa IA para estruturar a proposta com base no briefing e nas dores levantadas na reunião
+                D — Estrutura a proposta com base no briefing e nas dores levantadas na reunião, personalizando cada seção pro cliente
               </button>
-            
             </div>
           </div>
         </div>
@@ -2452,13 +2446,23 @@
               </button>
 
               <button
+                id="sdrScenarioOneGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="sdr-c1"
+                data-choice-correct="true"
+              >
+                B — Cria critérios de qualificação, prioriza os leads com maior potencial e começa pelos mais quentes
+              </button>
+
+              <button
                 id="sdrScenarioOneChoiceB"
                 class="choice-button"
                 type="button"
                 data-scenario-id="sdr-c1"
                 data-choice-correct="false"
               >
-                B — Foca nos leads que abriram o e-mail de prospecção, ignorando o resto
+                C — Foca nos leads que abriram o e-mail de prospecção, ignorando o resto
               </button>
 
               <button
@@ -2468,19 +2472,8 @@
                 data-scenario-id="sdr-c1"
                 data-choice-correct="false"
               >
-                C — Passa a lista para o comercial sem qualificar, alegando volume alto
+                D — Passa a lista para o comercial sem qualificar, alegando volume alto
               </button>
-
-              <button
-                id="sdrScenarioOneGoodChoice"
-                class="choice-button"
-                type="button"
-                data-scenario-id="sdr-c1"
-                data-choice-correct="true"
-              >
-                D — Usa IA para criar critérios de qualificação e priorizar os leads com maior potencial
-              </button>
-            
             </div>
           </div>
         </div>
@@ -2597,13 +2590,23 @@
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de SDR">
               
               <button
+                id="sdrScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="sdr-c2"
+                data-choice-correct="true"
+              >
+                A — Entende a dúvida técnica em profundidade, formula uma resposta clara e define o próximo passo antes de responder
+              </button>
+
+              <button
                 id="sdrScenarioTwoBadChoice"
                 class="choice-button"
                 type="button"
                 data-scenario-id="sdr-c2"
                 data-choice-correct="false"
               >
-                A — Responde que vai verificar e retorna em breve, sem prazo definido
+                B — Responde que vai verificar e retorna em breve, sem prazo definido
               </button>
 
               <button
@@ -2613,17 +2616,7 @@
                 data-scenario-id="sdr-c2"
                 data-choice-correct="false"
               >
-                B — Encaminha o e-mail para o time técnico sem contexto adicional
-              </button>
-
-              <button
-                id="sdrScenarioTwoGoodChoice"
-                class="choice-button"
-                type="button"
-                data-scenario-id="sdr-c2"
-                data-choice-correct="true"
-              >
-                C — Usa IA para entender a dúvida, formular uma resposta clara e definir o próximo passo
+                C — Encaminha o e-mail para o time técnico sem contexto adicional
               </button>
 
               <button
@@ -2635,7 +2628,6 @@
               >
                 D — Ignora a dúvida técnica e tenta agendar reunião direto
               </button>
-            
             </div>
           </div>
         </div>
@@ -2771,25 +2763,24 @@
               </button>
 
               <button
-                id="csScenarioOneChoiceC"
-                class="choice-button"
-                type="button"
-                data-scenario-id="cs-c1"
-                data-choice-correct="false"
-              >
-                C — Encaminha para o diretor sem tentar resolver primeiro
-              </button>
-
-              <button
                 id="csScenarioOneGoodChoice"
                 class="choice-button"
                 type="button"
                 data-scenario-id="cs-c1"
                 data-choice-correct="true"
               >
-                D — Usa IA para redigir uma resposta empática, profissional e com proposta de solução
+                C — Redige uma resposta empática, profissional e com proposta de solução — mesmo estando irritada
               </button>
-            
+
+              <button
+                id="csScenarioOneChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="cs-c1"
+                data-choice-correct="false"
+              >
+                D — Encaminha para o diretor sem tentar resolver primeiro
+              </button>
             </div>
           </div>
         </div>
@@ -2942,9 +2933,8 @@
                 data-scenario-id="cs-c2"
                 data-choice-correct="true"
               >
-                D — Usa IA para criar um template estruturado e adaptar os dados de cada cliente
+                D — Cria um template estruturado e adapta os dados de cada cliente de forma consistente
               </button>
-            
             </div>
           </div>
         </div>
@@ -3080,25 +3070,24 @@
               </button>
 
               <button
-                id="copyScenarioOneChoiceC"
-                class="choice-button"
-                type="button"
-                data-scenario-id="copy-c1"
-                data-choice-correct="false"
-              >
-                C — Copia headlines de anúncios concorrentes e adapta o texto
-              </button>
-
-              <button
                 id="copyScenarioOneGoodChoice"
                 class="choice-button"
                 type="button"
                 data-scenario-id="copy-c1"
                 data-choice-correct="true"
               >
-                D — Usa IA com contexto do produto, público e objetivo para gerar e refinar as 10 variações
+                C — Usa contexto do produto, público e objetivo para gerar e refinar as 10 variações de forma estruturada
               </button>
-            
+
+              <button
+                id="copyScenarioOneChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="copy-c1"
+                data-choice-correct="false"
+              >
+                D — Copia headlines de anúncios concorrentes e adapta o texto
+              </button>
             </div>
           </div>
         </div>
@@ -3224,13 +3213,23 @@
               </button>
 
               <button
+                id="copyScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="copy-c2"
+                data-choice-correct="true"
+              >
+                B — Interpreta o briefing, identifica as lacunas e monta as perguntas certas para alinhar com o cliente antes de escrever
+              </button>
+
+              <button
                 id="copyScenarioTwoChoiceB"
                 class="choice-button"
                 type="button"
                 data-scenario-id="copy-c2"
                 data-choice-correct="false"
               >
-                B — Devolve o briefing pedindo que o cliente preencha um formulário padrão
+                C — Devolve o briefing pedindo que o cliente preencha um formulário padrão
               </button>
 
               <button
@@ -3240,19 +3239,8 @@
                 data-scenario-id="copy-c2"
                 data-choice-correct="false"
               >
-                C — Agenda uma reunião de alinhamento antes de escrever qualquer coisa
+                D — Agenda uma reunião de alinhamento antes de escrever qualquer coisa
               </button>
-
-              <button
-                id="copyScenarioTwoGoodChoice"
-                class="choice-button"
-                type="button"
-                data-scenario-id="copy-c2"
-                data-choice-correct="true"
-              >
-                D — Usa IA para interpretar o briefing, identificar as lacunas e montar as perguntas certas para o cliente
-              </button>
-            
             </div>
           </div>
         </div>
@@ -3404,9 +3392,8 @@
                 data-scenario-id="design-c1"
                 data-choice-correct="true"
               >
-                D — Usa IA para organizar as anotações e transformar em briefing estruturado
+                D — Organiza as anotações da reunião e transforma em briefing estruturado antes de passar para o designer
               </button>
-            
             </div>
           </div>
         </div>
@@ -3524,13 +3511,23 @@
             <div class="choice-stack" aria-label="Escolhas do cenário 2 de Design">
               
               <button
+                id="designScenarioTwoGoodChoice"
+                class="choice-button"
+                type="button"
+                data-scenario-id="design-c2"
+                data-choice-correct="true"
+              >
+                A — Expande o conceito em referências visuais, paleta, tipografia e exemplos de mercado antes de passar para o designer
+              </button>
+
+              <button
                 id="designScenarioTwoBadChoice"
                 class="choice-button"
                 type="button"
                 data-scenario-id="design-c2"
                 data-choice-correct="false"
               >
-                A — Repassa 'moderno e jovem' para o designer e espera o resultado
+                B — Repassa 'moderno e jovem' para o designer e espera o resultado
               </button>
 
               <button
@@ -3540,7 +3537,7 @@
                 data-scenario-id="design-c2"
                 data-choice-correct="false"
               >
-                B — Manda 3 prints de concorrentes como referência sem contexto
+                C — Manda 3 prints de concorrentes como referência sem contexto
               </button>
 
               <button
@@ -3550,19 +3547,8 @@
                 data-scenario-id="design-c2"
                 data-choice-correct="false"
               >
-                C — Pede para o cliente enviar exemplos que ele gosta antes de qualquer coisa
+                D — Pede para o cliente enviar exemplos que ele gosta antes de qualquer coisa
               </button>
-
-              <button
-                id="designScenarioTwoGoodChoice"
-                class="choice-button"
-                type="button"
-                data-scenario-id="design-c2"
-                data-choice-correct="true"
-              >
-                D — Usa IA para expandir o conceito em referências visuais, paleta, tipografia e exemplos de mercado
-              </button>
-            
             </div>
           </div>
         </div>
@@ -3698,25 +3684,24 @@
               </button>
 
               <button
-                id="audiovisualScenarioOneChoiceC"
-                class="choice-button"
-                type="button"
-                data-scenario-id="audiovisual-c1"
-                data-choice-correct="false"
-              >
-                C — Usa um roteiro genérico de outro cliente de alimentação que deu certo antes
-              </button>
-
-              <button
                 id="audiovisualScenarioOneGoodChoice"
                 class="choice-button"
                 type="button"
                 data-scenario-id="audiovisual-c1"
                 data-choice-correct="true"
               >
-                D — Usa IA com contexto do cliente, público e objetivo para estruturar o roteiro
+                C — Estrutura o roteiro com base no contexto do cliente, público e objetivo antes da gravação
               </button>
-            
+
+              <button
+                id="audiovisualScenarioOneChoiceC"
+                class="choice-button"
+                type="button"
+                data-scenario-id="audiovisual-c1"
+                data-choice-correct="false"
+              >
+                D — Usa um roteiro genérico de outro cliente de alimentação que deu certo antes
+              </button>
             </div>
           </div>
         </div>
@@ -3843,13 +3828,13 @@
               </button>
 
               <button
-                id="audiovisualScenarioTwoChoiceB"
+                id="audiovisualScenarioTwoGoodChoice"
                 class="choice-button"
                 type="button"
                 data-scenario-id="audiovisual-c2"
-                data-choice-correct="false"
+                data-choice-correct="true"
               >
-                B — Usa a legenda automática do Instagram ao publicar sem revisar
+                B — Transcreve e adapta as legendas com apoio de ferramenta, revisando antes de publicar
               </button>
 
               <button
@@ -3863,15 +3848,14 @@
               </button>
 
               <button
-                id="audiovisualScenarioTwoGoodChoice"
+                id="audiovisualScenarioTwoChoiceB"
                 class="choice-button"
                 type="button"
                 data-scenario-id="audiovisual-c2"
-                data-choice-correct="true"
+                data-choice-correct="false"
               >
-                D — Usa IA para transcrever e adaptar as legendas, revisando antes de publicar
+                D — Usa a legenda automática do Instagram ao publicar sem revisar
               </button>
-            
             </div>
           </div>
         </div>
