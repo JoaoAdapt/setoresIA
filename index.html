@@ -538,6 +538,41 @@
       line-height: 1.15;
     }
 
+    .home-link-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .home-link-card {
+      text-decoration: none;
+    }
+
+    .home-start-button {
+      margin-top: 18px;
+    }
+
+    .back-to-sectors-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      transition: border-color var(--transition), color var(--transition);
+    }
+
+    .back-to-sectors-btn:hover {
+      border-color: rgba(255, 255, 255, 0.26);
+      color: var(--text);
+    }
+
     /* =========================================================
       8. TELA 3 — PLACEHOLDER DE CENÁRIO
     ========================================================== */
@@ -1255,10 +1290,12 @@
     ========================================================== -->
 
     <header class="top-bar" aria-label="Cabeçalho do jogo">
-      <div class="brand" aria-label="Adapt Estratégias Digitais">
+      <button id="brandHomeButton" class="brand" type="button" aria-label="Voltar para a home" style="background:none; border:none; cursor:pointer; padding:0;">
         <span class="brand-mark" aria-hidden="true">A</span>
         <span>Adapt</span>
-      </div>
+      </button>
+
+      <span id="playerNameDisplay" style="display:none; font-size: 0.84rem; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px;"></span>
 
       <div class="status-cluster" aria-label="Progresso do jogo">
         <div id="scorePill" class="score-pill" aria-live="polite">
@@ -1292,24 +1329,30 @@
             </div>
 
             <div class="eyebrow">
-              <span aria-hidden="true">🎮</span>
-              Mini jogo educacional
+              <span aria-hidden="true">👋</span>
+              Bem-vindo à Adapt
             </div>
 
             <h1 id="welcomeTitle">Missão Adapt</h1>
 
             <p class="subtitle">
-              Você acabou de entrar como jovem aprendiz. Sua primeira missão começa agora.
+              Explore os setores da agência, tome decisões reais e descubra como a IA transforma o trabalho de cada área.
             </p>
 
-            <button
-              id="startButton"
-              class="primary-button"
-              type="button"
-              aria-label="Iniciar Missão"
-            >
-              <span>Iniciar Missão</span>
-              <span aria-hidden="true">➜</span>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px;">
+              <a href="https://adaptmkt.com.br/" target="_blank" rel="noopener noreferrer" class="sector-card" style="text-decoration:none; min-height:80px; justify-content:center; align-items:center; flex-direction:column; gap:6px; text-align:center;">
+                <span style="font-size:1.6rem;">🌐</span>
+                <span class="sector-name">Site da Adapt</span>
+              </a>
+              <a href="https://www.instagram.com/adaptestrategiasdigitais/" target="_blank" rel="noopener noreferrer" class="sector-card" style="text-decoration:none; min-height:80px; justify-content:center; align-items:center; flex-direction:column; gap:6px; text-align:center;">
+                <span style="font-size:1.6rem;">📸</span>
+                <span class="sector-name">Instagram</span>
+              </a>
+            </div>
+
+            <button id="startButton" class="primary-button" type="button" aria-label="Iniciar missão" style="margin-top: 16px;">
+              <span>Iniciar sua Missão</span>
+              <span aria-hidden="true">🚀</span>
             </button>
           </div>
         </div>
@@ -1328,14 +1371,14 @@
           <div class="screen-content">
             <div class="section-header">
               <div class="eyebrow">
-                <span aria-hidden="true">📝</span>
-                Antes de começar
+                <span aria-hidden="true">👋</span>
+                Comece por aqui
               </div>
 
               <h2 id="registerTitle">Quem é você?</h2>
 
               <p class="subtitle">
-                Seu resultado vai pro ranking geral. Sem cadastro, sem pontos.
+                Crie seu perfil para entrar na Missão Adapt e aparecer no ranking.
               </p>
             </div>
 
@@ -1387,6 +1430,65 @@
                 <span aria-hidden="true">→</span>
               </button>
             </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+        TELA HOME — BOAS-VINDAS APÓS CADASTRO
+      ========================================================== -->
+
+      <section
+        id="screen-home"
+        class="screen"
+        aria-labelledby="homeTitle"
+      >
+        <div class="screen-card">
+          <div class="screen-content">
+            <div class="section-header">
+              <div class="eyebrow">
+                <span aria-hidden="true">🎮</span>
+                Bem-vindo à Adapt
+              </div>
+
+              <h2 id="homeTitle">Sua missão começa aqui.</h2>
+
+              <p class="subtitle">
+                Explore os setores da agência, tome decisões reais e descubra como a IA transforma o trabalho de cada área.
+              </p>
+            </div>
+
+            <div class="home-link-grid" aria-label="Links úteis da Adapt">
+              <a
+                class="sector-card home-link-card"
+                href="https://adaptmkt.com.br/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir site da Adapt em nova aba"
+              >
+                <span class="sector-emoji" aria-hidden="true">🌐</span>
+                <span class="sector-name">Site da Adapt</span>
+              </a>
+
+              <a
+                class="sector-card home-link-card"
+                href="https://www.instagram.com/adaptestrategiasdigitais/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir Instagram da Adapt em nova aba"
+              >
+                <span class="sector-emoji" aria-hidden="true">📸</span>
+                <span class="sector-name">Instagram</span>
+              </a>
+            </div>
+
+            <button
+              id="homeStartButton"
+              class="primary-button home-start-button"
+              type="button"
+            >
+              Bem-vindo à Adapt — sua missão começa aqui
+            </button>
           </div>
         </div>
       </section>
@@ -1497,6 +1599,11 @@
               <span aria-hidden="true">🎯</span>
               Desafio 1 de 2
             </div>
+
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
 
             <h2 id="trafficScenarioOneTitle" class="traffic-title">
               Thomas — Tráfego Pago
@@ -1653,6 +1760,11 @@
               Desafio 2 de 2
             </div>
 
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
+
             <h2 id="trafficScenarioTwoTitle" class="traffic-title">
               Thomas — Tráfego Pago
             </h2>
@@ -1805,6 +1917,11 @@
               <span aria-hidden="true">👥</span>
               Desafio 1 de 2
             </div>
+
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
 
             <h2 id="hrScenarioOneTitle" class="traffic-title">
               Luana — RH
@@ -1960,6 +2077,11 @@
               Desafio 2 de 2
             </div>
 
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
+
             <h2 id="hrScenarioTwoTitle" class="traffic-title">
               Luana — RH
             </h2>
@@ -2112,6 +2234,11 @@
               <span aria-hidden="true">💼</span>
               Desafio 1 de 2
             </div>
+
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
 
             <h2 id="commercialScenarioOneTitle" class="traffic-title">
               Nadia — Comercial
@@ -2267,6 +2394,11 @@
               Desafio 2 de 2
             </div>
 
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
+
             <h2 id="commercialScenarioTwoTitle" class="traffic-title">
               Nadia — Comercial
             </h2>
@@ -2419,6 +2551,11 @@
               <span aria-hidden="true">📞</span>
               Desafio 1 de 2
             </div>
+
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
 
             <h2 id="sdrScenarioOneTitle" class="traffic-title">
               Murilo — SDR
@@ -2574,6 +2711,11 @@
               Desafio 2 de 2
             </div>
 
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
+
             <h2 id="sdrScenarioTwoTitle" class="traffic-title">
               Murilo — SDR
             </h2>
@@ -2726,6 +2868,11 @@
               <span aria-hidden="true">🤝</span>
               Desafio 1 de 2
             </div>
+
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
 
             <h2 id="csScenarioOneTitle" class="traffic-title">
               Amanda — Atendimento
@@ -2881,6 +3028,11 @@
               Desafio 2 de 2
             </div>
 
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
+
             <h2 id="csScenarioTwoTitle" class="traffic-title">
               Amanda — Atendimento
             </h2>
@@ -3033,6 +3185,11 @@
               <span aria-hidden="true">✍️</span>
               Desafio 1 de 2
             </div>
+
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
 
             <h2 id="copyScenarioOneTitle" class="traffic-title">
               Gian — Copy
@@ -3188,6 +3345,11 @@
               Desafio 2 de 2
             </div>
 
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
+
             <h2 id="copyScenarioTwoTitle" class="traffic-title">
               Gian — Copy
             </h2>
@@ -3339,6 +3501,11 @@
               <span aria-hidden="true">🎨</span>
               Desafio 1 de 2
             </div>
+
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
 
             <h2 id="designScenarioOneTitle" class="traffic-title">
               Fran — Design
@@ -3495,6 +3662,11 @@
               Desafio 2 de 2
             </div>
 
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
+
             <h2 id="designScenarioTwoTitle" class="traffic-title">
               Fran — Design
             </h2>
@@ -3647,6 +3819,11 @@
               <span aria-hidden="true">🎬</span>
               Desafio 1 de 2
             </div>
+
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
 
             <h2 id="audiovisualScenarioOneTitle" class="traffic-title">
               Morgana — Audiovisual
@@ -3801,6 +3978,11 @@
               <span aria-hidden="true">🎬</span>
               Desafio 2 de 2
             </div>
+
+
+            <button class="back-to-sectors-btn" type="button" aria-label="Voltar para seleção de setor">
+              ← Setores
+            </button>
 
             <h2 id="audiovisualScenarioTwoTitle" class="traffic-title">
               Morgana — Audiovisual
@@ -4219,6 +4401,7 @@
         updateScoreDisplay();
         updateProgress();
         renderSectorCards();
+        updatePlayerNameDisplay();
         const target = s.currentScreen || 'welcome';
         const scenarioResultScreens = [
           'trafficScenarioOneSuccess', 'trafficScenarioOneFailure',
@@ -4284,6 +4467,18 @@
       }
     }
 
+    function updatePlayerNameDisplay() {
+      const display = document.getElementById('playerNameDisplay');
+      if (!display) return;
+      const firstName = playerName ? playerName.trim().split(' ')[0] : '';
+      if (firstName) {
+        display.textContent = firstName + ' 🚀';
+        display.style.display = 'block';
+      } else {
+        display.style.display = 'none';
+      }
+    }
+
     /* =========================================================
       2. SELETORES DO DOM
     ========================================================== */
@@ -4291,6 +4486,7 @@
     const screens = {
       welcome: document.getElementById("welcomeScreen"),
       register: document.getElementById("screen-register"),
+      home: document.getElementById("screen-home"),
       sectors: document.getElementById("sectorScreen"),
       scenario: document.getElementById("scenarioScreen"),
       trafficScenarioOne: document.getElementById("trafficScenarioOneScreen"),
@@ -4348,6 +4544,7 @@
 
     const startButton = document.getElementById("startButton");
     const backButton = document.getElementById("backButton");
+    const homeStartButton = document.getElementById("homeStartButton");
     const sectorGrid = document.getElementById("sectorGrid");
 
     const scorePill = document.getElementById("scorePill");
@@ -4556,9 +4753,13 @@
     }
 
     function updateScoreVisibility(screenName) {
-      const shouldShowScore = !["welcome", "register"].includes(screenName);
-      scorePill.classList.toggle("is-visible", shouldShowScore);
-      progressPill.classList.toggle("is-visible", shouldShowScore);
+      const shouldShowScore = screenName !== 'register';
+      scorePill.classList.toggle('is-visible', shouldShowScore && Boolean(playerName));
+      progressPill.classList.toggle('is-visible', shouldShowScore && Boolean(playerName));
+      const nameDisplay = document.getElementById('playerNameDisplay');
+      if (nameDisplay) {
+        nameDisplay.style.display = (shouldShowScore && playerName) ? 'block' : 'none';
+      }
     }
 
     function showScreen(screenName) {
@@ -4708,11 +4909,13 @@
 
     function resetGame() {
       clearSession();
+      updatePlayerNameDisplay();
       score = 0;
       selectedSector = null;
       playerName = "";
       playerAge = "";
       playerEmail = "";
+      updatePlayerNameDisplay();
       resultSaved = false;
       completedSectors.clear();
       resetScenarioAttempts();
@@ -4725,7 +4928,7 @@
       updateScoreDisplay();
       updateProgress();
       renderSectorCards();
-      showScreen("welcome");
+      showScreen("register");
     }
 
     function setFieldError(input, errorElement, message) {
@@ -4789,7 +4992,8 @@
         return;
       }
 
-      showScreen("sectors");
+      updatePlayerNameDisplay();
+      showScreen("welcome");
     }
 
     async function savePlayerResultToSupabase() {
@@ -5519,7 +5723,20 @@
     };
 
     startButton.addEventListener("click", () => {
-      showScreen("register");
+      showScreen("sectors");
+    });
+
+    homeStartButton.addEventListener("click", () => {
+      showScreen("sectors");
+    });
+
+    document.getElementById('brandHomeButton').addEventListener('click', () => {
+      const outOfGame = ['register', 'welcome'].some(name =>
+        screens[name] && screens[name].classList.contains('is-active')
+      );
+      if (!outOfGame) {
+        showScreen('welcome');
+      }
     });
 
     backButton.addEventListener("click", () => {
@@ -5546,6 +5763,12 @@
 
     document.querySelectorAll(".choice-button[data-scenario-id][data-choice-correct]").forEach((button) => {
       button.addEventListener("click", handleScenarioChoiceClick);
+    });
+
+    document.querySelectorAll('.back-to-sectors-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        showScreen('sectors');
+      });
     });
 
     goToTrafficScenarioTwoButton.addEventListener("click", () => {
@@ -5695,7 +5918,7 @@
       renderSectorCards();
       const restored = restoreSession();
       if (!restored) {
-        showScreen("welcome");
+        showScreen('register');
       }
     }
 
