@@ -590,13 +590,14 @@
 
     .exit-warning {
       display: none;
-      position: fixed;
+      position: absolute;
       bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 18px;
+      right: 18px;
+      transform: none;
       z-index: 100;
-      width: calc(100% - 36px);
-      max-width: 444px;
+      width: auto;
+      max-width: none;
       padding: 16px 18px;
       border-radius: var(--radius-md);
       border: 1px solid rgba(251, 113, 133, 0.4);
